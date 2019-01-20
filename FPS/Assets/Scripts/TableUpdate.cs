@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class TableUpdate : MonoBehaviour
 {
     public GameObject resultsMenuPanel;
     public bool gameOver;
+    private readonly string placeholderPlayerName = "-";
+    private readonly int totalAmountPlayers = 5;
 
     // Use this for initialization
     void Start()
@@ -18,20 +18,19 @@ public class TableUpdate : MonoBehaviour
         RenderWinnersTable();
     }
 
-    public static void UpdateWinnersTable()
+    public void UpdateWinnersTable()
     {
-        int i, j;
-        PlayerIdentifier[] array;
-        for (i = 0; i < 5; i++)
+        int i;
+        for (i = 0; i < totalAmountPlayers; i++)
         {
             if (WinnersTable.Winners[i].pontuation <= WinnersTable.CurrentPlayer.pontuation) break;
         }
 
-        if (i < 5)
+        if (i < totalAmountPlayers)
         {
-            array = (PlayerIdentifier[])WinnersTable.Winners.Clone();
+            PlayerIdentifier[] array = (PlayerIdentifier[])WinnersTable.Winners.Clone();
 
-            for (j = i; j < 4; j++)
+            for (int j = i; j < totalAmountPlayers - 1; j++)
             {
                 WinnersTable.Winners[j + 1].name = array[j].name;
                 WinnersTable.Winners[j + 1].pontuation = array[j].pontuation;
@@ -45,48 +44,30 @@ public class TableUpdate : MonoBehaviour
     public void RenderWinnersTable()
     {
         Text[] table = resultsMenuPanel.GetComponentsInChildren<Text>();
-        for (int i = 0; i <= 12; i++)
+
+        foreach (Text tableRow in table)
         {
-            if (table[i].name == "FirstUserIdentifierHeading")
+            if(tableRow.name.Contains("Username"))
             {
-                table[i].text = WinnersTable.Winners[0].name;
-            }
-            else if (table[i].name == "FirstUserPontuationHeading")
+                int index = int.Parse(tableRow.name.Substring(tableRow.name.Length - 1, 1)) - 1;
+                tableRow.text = PlayerName(index);
+            } else if (tableRow.name.Contains("Pontuation"))
             {
-                table[i].text = WinnersTable.Winners[0].pontuation.ToString();
+                int index = int.Parse(tableRow.name.Substring(tableRow.name.Length - 1, 1)) - 1;
+                tableRow.text = WinnersTable.Winners[index].pontuation.ToString();
             }
-            else if (table[i].name == "SecondUserIdentifierHeading")
-            {
-                table[i].text = WinnersTable.Winners[1].name;
-            }
-            else if (table[i].name == "SecondUserPontuationHeading")
-            {
-                table[i].text = WinnersTable.Winners[1].pontuation.ToString();
-            }
-            else if (table[i].name == "ThirdUserIdentifierHeading")
-            {
-                table[i].text = WinnersTable.Winners[2].name;
-            }
-            else if (table[i].name == "ThirdUserPontuationHeading")
-            {
-                table[i].text = WinnersTable.Winners[2].pontuation.ToString();
-            }
-            else if (table[i].name == "FourthUserIdentifierHeading")
-            {
-                table[i].text = WinnersTable.Winners[3].name;
-            }
-            else if (table[i].name == "FourthUserPontuationHeading")
-            {
-                table[i].text = WinnersTable.Winners[3].pontuation.ToString();
-            }
-            else if (table[i].name == "FifthUserIdentifierHeading")
-            {
-                table[i].text = WinnersTable.Winners[4].name;
-            }
-            else if (table[i].name == "FifthUserIdentifierHeading")
-            {
-                table[i].text = WinnersTable.Winners[4].pontuation.ToString();
-            }
+        }
+    }
+
+    private string PlayerName(int position)
+    {
+        if (!string.IsNullOrEmpty(WinnersTable.Winners[position].name))
+        {
+            return WinnersTable.Winners[position].name;
+        }
+        else
+        {
+            return placeholderPlayerName;
         }
     }
 }

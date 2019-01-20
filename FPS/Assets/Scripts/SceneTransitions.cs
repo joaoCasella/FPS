@@ -8,13 +8,15 @@ public class SceneTransitions : MonoBehaviour {
 
     public Animator transitionAnimator;
     public GameObject mainMenuPanel, startMenuPanel, resultsMenuPanel;
-    public InputField usernameInput; 
+    public InputField usernameInput;
+    public GameObject usernameNotNullMessage;
+    public float sceneTransitionTime = 1.5f;
     public string sceneName;
 
     IEnumerator LoadScene()
     {
         transitionAnimator.SetTrigger("End");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(sceneTransitionTime);
         SceneManager.LoadScene(sceneName);
     }
 
@@ -26,8 +28,16 @@ public class SceneTransitions : MonoBehaviour {
 
     public void RegisterNameAndBeginNewGame()
     {
-        WinnersTable.CurrentPlayer = new PlayerIdentifier(0, usernameInput.text);
-        StartCoroutine(LoadScene());
+        if(string.IsNullOrEmpty(usernameInput.text))
+        {
+            usernameNotNullMessage.SetActive(true);
+        } else
+        {
+            usernameNotNullMessage.SetActive(false);
+            WinnersTable.CurrentPlayer = new PlayerIdentifier(0, usernameInput.text);
+            StartCoroutine(LoadScene());
+        }
+        
     }
 
     public void PlayerDeathAndScreenChange(int pontuation)

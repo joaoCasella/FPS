@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        player.ResetPlayer();
+        player.SetupInitialPlayerState();
         player.transform.position = new Vector3(0, 3, 0);
         player.OnPlayerDeath += SavePontuationAndFinishGame;
         nextRoundStart = 10f;

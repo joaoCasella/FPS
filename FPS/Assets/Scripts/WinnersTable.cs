@@ -16,7 +16,6 @@ public struct PlayerIdentifier
 
 public class WinnersTable : MonoBehaviour {
     private static PlayerIdentifier[] winners = new PlayerIdentifier[5];
-    private static PlayerIdentifier currentPlayer;
 
     public static PlayerIdentifier[] Winners
     {
@@ -30,15 +29,5 @@ public class WinnersTable : MonoBehaviour {
         }
     }
 
-    public static PlayerIdentifier CurrentPlayer
-    {
-        get
-        {
-            return currentPlayer;
-        }
-        set
-        {
-            currentPlayer = value;
-        }
-    }
+    public static PlayerIdentifier CurrentPlayer { get; set; }
 }

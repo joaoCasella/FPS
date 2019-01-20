@@ -13,7 +13,7 @@ This is my first 3D game, so any feedbacks and suggestions are apreciated. All I
 # Possible Improvements
 My goal is to learn about the engine and its workflow. But still, there are some points of the game itself that could be improved in the game:
 - [x] Fix the mouse cursor, that is visible during the gameplay (should be visible only in the menus)
-- [ ] Fix the leaderboard appearance and logic
+- [x] Fix the leaderboard appearance and logic
 - [ ] Save the leaderboard to the persistent storage on change 
 - [ ] Fix the enemy shots direction (they were suposed to aim at the player)
 - [ ] Reduce total project size

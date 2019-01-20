@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 32654476}
   - component: {fileID: 32654475}
   m_Layer: 5
-  m_Name: FourthUserIdentifierHeading
+  m_Name: Username4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -390,6 +390,7 @@ RectTransform:
   m_Children:
   - {fileID: 1954624027}
   - {fileID: 1090701771}
+  - {fileID: 2127433126}
   - {fileID: 1641930372}
   m_Father: {fileID: 1350487773}
   m_RootOrder: 2
@@ -561,7 +562,7 @@ GameObject:
   - component: {fileID: 196638369}
   - component: {fileID: 196638368}
   m_Layer: 5
-  m_Name: ThirdUserIdentifierHeading
+  m_Name: Username3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -636,7 +637,7 @@ GameObject:
   - component: {fileID: 329983841}
   - component: {fileID: 329983840}
   m_Layer: 5
-  m_Name: FifthUserPontuationHeading
+  m_Name: Pontuation5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,10 +734,10 @@ RectTransform:
   m_Father: {fileID: 181038508}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -88.27072}
-  m_SizeDelta: {x: 220, y: 46.541443}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &348013972
 MonoBehaviour:
@@ -840,6 +841,8 @@ MonoBehaviour:
   startMenuPanel: {fileID: 90042264}
   resultsMenuPanel: {fileID: 22945388}
   usernameInput: {fileID: 0}
+  usernameNotNullMessage: {fileID: 0}
+  sceneTransitionTime: 1.5
   sceneName: SampleScene
 --- !u!1001 &593211002
 Prefab:
@@ -920,10 +923,10 @@ RectTransform:
   m_Father: {fileID: 181038508}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -181.3536}
-  m_SizeDelta: {x: 220, y: 46.541443}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &829218770
 MonoBehaviour:
@@ -1027,6 +1030,8 @@ MonoBehaviour:
   startMenuPanel: {fileID: 90042264}
   resultsMenuPanel: {fileID: 22945388}
   usernameInput: {fileID: 0}
+  usernameNotNullMessage: {fileID: 0}
+  sceneTransitionTime: 1.5
   sceneName: SampleScene
 --- !u!1 &850595661
 GameObject:
@@ -1044,7 +1049,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &850595662
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1075,7 +1080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
+  m_Color: {r: 0.735849, g: 0.735849, b: 0.735849, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1095,7 +1100,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Enter...
+  m_Text: Username
 --- !u!222 &850595664
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1114,7 +1119,7 @@ GameObject:
   - component: {fileID: 869514456}
   - component: {fileID: 869514455}
   m_Layer: 5
-  m_Name: UsernameHeading
+  m_Name: NameHeading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1213,8 +1218,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -170.5009}
-  m_SizeDelta: {x: 220, y: 65.563515}
+  m_AnchoredPosition: {x: 200, y: -124.13238}
+  m_SizeDelta: {x: 220, y: 32.742992}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1090701772
 MonoBehaviour:
@@ -1258,13 +1263,24 @@ MonoBehaviour:
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
-  m_LineType: 0
+  m_LineType: 1
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 0
+  m_CharacterLimit: 15
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1641930376}
+        m_MethodName: RegisterNameAndBeginNewGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.InputField+SubmitEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_OnValueChanged:
@@ -1546,6 +1562,8 @@ MonoBehaviour:
   startMenuPanel: {fileID: 90042264}
   resultsMenuPanel: {fileID: 22945388}
   usernameInput: {fileID: 0}
+  usernameNotNullMessage: {fileID: 0}
+  sceneTransitionTime: 1.5
   sceneName: SampleScene
 --- !u!1 &1232718644
 GameObject:
@@ -1633,7 +1651,7 @@ GameObject:
   - component: {fileID: 1260982849}
   - component: {fileID: 1260982848}
   m_Layer: 5
-  m_Name: ThirdUserPontuationHeading
+  m_Name: Pontuation3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1783,7 +1801,7 @@ GameObject:
   - component: {fileID: 1341769246}
   - component: {fileID: 1341769245}
   m_Layer: 5
-  m_Name: FirstUserPontuationHeading
+  m_Name: Pontuation1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1957,6 +1975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resultsMenuPanel: {fileID: 22945388}
+  gameOver: 0
 --- !u!1 &1440257098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1989,6 +2008,8 @@ MonoBehaviour:
   startMenuPanel: {fileID: 90042264}
   resultsMenuPanel: {fileID: 22945388}
   usernameInput: {fileID: 1090701772}
+  usernameNotNullMessage: {fileID: 0}
+  sceneTransitionTime: 1.5
   sceneName: SampleScene
 --- !u!4 &1440257100
 Transform:
@@ -2014,7 +2035,7 @@ GameObject:
   - component: {fileID: 1475535980}
   - component: {fileID: 1475535979}
   m_Layer: 5
-  m_Name: FifthUserIdentifierHeading
+  m_Name: Username5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2108,10 +2129,10 @@ RectTransform:
   m_Father: {fileID: 1090701771}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.5}
-  m_SizeDelta: {x: -20, y: -13}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1596145017
 MonoBehaviour:
@@ -2134,7 +2155,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
-    m_FontSize: 32
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -2142,7 +2163,7 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
@@ -2184,12 +2205,12 @@ RectTransform:
   m_Children:
   - {fileID: 1338435259}
   m_Father: {fileID: 90042265}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -250.32202}
-  m_SizeDelta: {x: 220, y: 94.07872}
+  m_AnchoredPosition: {x: 200, y: -172.5641}
+  m_SizeDelta: {x: 220, y: 64.12045}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1641930373
 MonoBehaviour:
@@ -2293,6 +2314,8 @@ MonoBehaviour:
   startMenuPanel: {fileID: 90042264}
   resultsMenuPanel: {fileID: 22945388}
   usernameInput: {fileID: 1090701772}
+  usernameNotNullMessage: {fileID: 2127433123}
+  sceneTransitionTime: 1.5
   sceneName: SampleScene
 --- !u!1 &1738012559
 GameObject:
@@ -2380,7 +2403,7 @@ GameObject:
   - component: {fileID: 1789845287}
   - component: {fileID: 1789845286}
   m_Layer: 5
-  m_Name: SecondUserPontuationHeading
+  m_Name: Pontuation2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2455,7 +2478,7 @@ GameObject:
   - component: {fileID: 1833207958}
   - component: {fileID: 1833207957}
   m_Layer: 5
-  m_Name: FirstUserIdentifierHeading
+  m_Name: Username1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2530,7 +2553,7 @@ GameObject:
   - component: {fileID: 1877352208}
   - component: {fileID: 1877352207}
   m_Layer: 5
-  m_Name: FourthUserPontuationHeading
+  m_Name: Pontuation4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2605,7 +2628,7 @@ GameObject:
   - component: {fileID: 1905208803}
   - component: {fileID: 1905208802}
   m_Layer: 5
-  m_Name: UserPontuationHeading
+  m_Name: PointsHeading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2817,7 +2840,7 @@ GameObject:
   - component: {fileID: 1940422565}
   - component: {fileID: 1940422564}
   m_Layer: 5
-  m_Name: SecondUserIdentifierHeading
+  m_Name: Username2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2913,8 +2936,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -101.35957}
-  m_SizeDelta: {x: 220, y: 72.71915}
+  m_AnchoredPosition: {x: 200, y: -86.38044}
+  m_SizeDelta: {x: 220, y: 42.76088}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1954624028
 MonoBehaviour:
@@ -2989,10 +3012,10 @@ RectTransform:
   m_Father: {fileID: 181038508}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -134.81216}
-  m_SizeDelta: {x: 220, y: 46.541443}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2037564823
 MonoBehaviour:
@@ -3096,6 +3119,8 @@ MonoBehaviour:
   startMenuPanel: {fileID: 90042264}
   resultsMenuPanel: {fileID: 22945388}
   usernameInput: {fileID: 0}
+  usernameNotNullMessage: {fileID: 0}
+  sceneTransitionTime: 1.5
   sceneName: SampleScene
 --- !u!1 &2038953610
 GameObject:
@@ -3172,3 +3197,78 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2038953610}
   m_CullTransparentMesh: 0
+--- !u!1 &2127433123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2127433126}
+  - component: {fileID: 2127433125}
+  - component: {fileID: 2127433124}
+  m_Layer: 5
+  m_Name: StartUserNameNotEmpty
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2127433124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2127433123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.990566, g: 0.4251958, b: 0.4251958, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 2
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 70
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: Username must not be null
+--- !u!222 &2127433125
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2127433123}
+  m_CullTransparentMesh: 0
+--- !u!224 &2127433126
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2127433123}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 90042265}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 200, y: -139.56483}
+  m_SizeDelta: {x: 220, y: 17.465637}
+  m_Pivot: {x: 0.5, y: 0.5}

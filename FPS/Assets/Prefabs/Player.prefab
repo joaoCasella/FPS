@@ -605,7 +605,7 @@ MonoBehaviour:
     MaximumX: 90
     smooth: 1
     smoothTime: 18
-    lockCursor: 1
+    lockCursor: 0
   advancedSettings:
     groundCheckDistance: 0.1
     stickToGroundHelperDistance: 0.6
@@ -626,6 +626,7 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   bulletCount: 0
+  pontuation: 0
   bulletSpawnPoint: {fileID: 4052536851624604}
   bullet: {fileID: 1637729869774072, guid: 87702be4705e66344a789f8ace6f3eec, type: 2}
 --- !u!114 &114930568712182226

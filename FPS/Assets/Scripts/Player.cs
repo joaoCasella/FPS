@@ -5,9 +5,13 @@ using System;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class Player : MonoBehaviour {
-
-    public float maxHealth, health;
+    public float maxHealth = 100f;
+    public float minHealth = 0f;
+    public float health;
     private bool playerDead;
+    public int initialBulletCount = 10;
+    public int lowestBulletCountPossible = 0;
+    public int initialPontuation = 0;
     public int bulletCount, pontuation;
     public Transform bulletSpawnPoint;
     public GameObject bullet;
@@ -15,30 +19,24 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        maxHealth = 100;
-        health = maxHealth;
-        playerDead = false;
-        bulletCount = 10;
-        pontuation = 0;
-        GameController.showCursor(false);
+        SetupInitialPlayerState();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (health <= 0f) {
+        if (health <= minHealth) {
             Die();
-        } else if (Input.GetMouseButtonDown(0) && !playerDead) {
-            if (bulletCount > 0) Shoot();
+        } else if (Input.GetMouseButton(0) && !playerDead) {
+            if (bulletCount > lowestBulletCountPossible) Shoot();
         }
 	}
 
-    public void ResetPlayer()
+    public void SetupInitialPlayerState()
     {
-        maxHealth = 100;
         health = maxHealth;
         playerDead = false;
-        bulletCount = 10;
-        pontuation = 0;
+        bulletCount = initialBulletCount;
+        pontuation = initialPontuation;
         GameController.showCursor(false);
     }
 
