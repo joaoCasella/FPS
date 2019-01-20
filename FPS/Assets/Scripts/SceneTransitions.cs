@@ -33,7 +33,19 @@ public class SceneTransitions : MonoBehaviour {
     public void PlayerDeathAndScreenChange(int pontuation)
     {
         WinnersTable.CurrentPlayer = new PlayerIdentifier(pontuation, WinnersTable.CurrentPlayer.name);
-        StartCoroutine(LoadScene());
+        StartCoroutine(SetupTransition());
+    }
+
+    IEnumerator SetupTransition()
+    {
+        yield return StartCoroutine(LoadScene());
+        yield return StartCoroutine(SetupCursor());
+    }
+
+    IEnumerator SetupCursor()
+    {
+        GameController.showCursor(true);
+        yield return null;
     }
 
     public void StartNewGameClick()

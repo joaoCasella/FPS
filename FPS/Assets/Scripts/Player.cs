@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
         playerDead = false;
         bulletCount = 10;
         pontuation = 0;
+        GameController.showCursor(false);
     }
 	
 	// Update is called once per frame
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour {
         playerDead = false;
         bulletCount = 10;
         pontuation = 0;
+        GameController.showCursor(false);
     }
 
     void Shoot()

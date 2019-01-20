@@ -88,4 +88,10 @@ public class GameController : MonoBehaviour {
     {
         return (enemy1 == null && enemy2 == null && enemy3 == null && enemy4 == null);
     }
+
+    public static void showCursor(bool shouldShow)
+    {
+        Cursor.visible = shouldShow;
+        Cursor.lockState = shouldShow ? CursorLockMode.None : CursorLockMode.Locked;
+    }
 }
