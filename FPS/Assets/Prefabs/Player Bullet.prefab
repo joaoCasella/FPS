@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 33799497717679326}
   - component: {fileID: 23152920735301544}
   - component: {fileID: 135432943261189938}
-  - component: {fileID: 114546040308390574}
+  - component: {fileID: 114670371515817700}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Player Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1637729869774072}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114546040308390574
+--- !u!114 &114670371515817700
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,13 +93,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1637729869774072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afb81659bc6990c4397838141b1e495a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d81701eab364be46816d32b523f89c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expireRate: 2
-  bulletSpeed: 10
-  playerDamage: 10
-  enemyDamage: 15
+  expireRate: 4
+  bulletSpeed: 16
+  damage: 15
 --- !u!135 &135432943261189938
 SphereCollider:
   m_ObjectHideFlags: 1

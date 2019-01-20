@@ -623,12 +623,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea8c6eb62282b847ac1252afe33bd8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  health: 0
-  bulletCount: 0
-  pontuation: 0
+  minHealth: 0
   bulletSpawnPoint: {fileID: 4052536851624604}
   bullet: {fileID: 1637729869774072, guid: 87702be4705e66344a789f8ace6f3eec, type: 2}
+  initialBulletCount: 10
+  lowestBulletCountPossible: 0
+  rateOfFire: 0.2
+  lastShotIteration: 0
+  initialPontuation: 0
+  bulletCount: 0
+  pontuation: 0
 --- !u!114 &114930568712182226
 MonoBehaviour:
   m_ObjectHideFlags: 1

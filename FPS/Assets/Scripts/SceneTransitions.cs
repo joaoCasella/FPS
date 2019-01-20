@@ -54,7 +54,7 @@ public class SceneTransitions : MonoBehaviour {
 
     IEnumerator SetupCursor()
     {
-        GameController.showCursor(true);
+        GameController.ShowCursor(true);
         yield return null;
     }
 

@@ -10894,7 +10894,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.02, y: 0.8}
   m_AnchorMax: {x: 0.3, y: 0.99}
-  m_AnchoredPosition: {x: 0, y: -0.000030517578}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: -45.360016, y: -17.319794}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1381954834
@@ -13856,15 +13856,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae8fb450e712f2149b06e1a1cd34957f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 114546040308390574, guid: 87702be4705e66344a789f8ace6f3eec, type: 2}
   player: {fileID: 540500364}
   enemy: {fileID: 114546344184303156, guid: f769f94a6db5c2d42a855db8f14f346b, type: 2}
   ammoBox: {fileID: 114188593819006166, guid: f07ff1ccbfef90c498fed5d34bcfe86e, type: 2}
   sceneTransition: {fileID: 1918170099}
-  enemyDamage: 10
-  playerDamage: 15
   timeUntilNextRound: 0
-  nextRoundStart: 0
+  nextRoundStart: 5
   playerHealth: {fileID: 232012626}
   playerPontuation: {fileID: 1381954834}
   playerAmmo: {fileID: 599628685}

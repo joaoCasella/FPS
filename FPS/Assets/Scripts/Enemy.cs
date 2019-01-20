@@ -1,34 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
 
-public class Enemy : MonoBehaviour {
-
-    public float maxHealth = 30f, interval = 1f;
-    private float health;
+public class Enemy : Character {
+    public override float maxHealth
+    {
+        get { return 30f; }
+    }
+    public float interval = 1f;
     private int iterations = 0;
     public int damping = 1;
-    private bool enemyDead = false;
-    public Transform player, bulletSpawnPoint;
-    public GameObject bullet;
-    public event Action OnEnemyDeath;
+    public Transform player;
 
     // Use this for initialization
     void Start()
     {
-        health = maxHealth;
+        CharacterInitialization();
         player = FindObjectOfType<Player>().transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckCharacterHealth();
+
         TrackPlayerMovement();
  
-        if (health <= 0) {
-            Die();
-        } else if (Time.deltaTime * iterations >= interval && !enemyDead) {
+        if (Time.deltaTime * iterations >= interval && !dead) {
             Shoot();
         } else {
             iterations ++;
@@ -46,22 +42,15 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    public void Hit(float damage)
+    protected new void Shoot()
     {
-        health -= damage;
-    }
-
-    void Shoot()
-    {
-        GameObject bulletFired = (GameObject)Instantiate(bullet.gameObject, bulletSpawnPoint.transform.position, Quaternion.identity);
-        bulletFired.transform.rotation = bulletSpawnPoint.transform.rotation;
+        base.Shoot();
         iterations = 0;
     }
 
-    void Die()
+    protected override void Die()
     {
-        enemyDead = true;
-        OnEnemyDeath();
+        base.Die();
         Destroy(this.gameObject);
     }
 }

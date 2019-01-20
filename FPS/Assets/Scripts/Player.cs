@@ -1,34 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using UnityStandardAssets.Characters.FirstPerson;
+﻿using UnityEngine;
 
-public class Player : MonoBehaviour {
-    public float maxHealth = 100f;
-    public float minHealth = 0f;
-    public float health;
-    private bool playerDead;
+public class Player : Character {
     public int initialBulletCount = 10;
     public int lowestBulletCountPossible = 0;
     public float rateOfFire = 0.2f;
     public int lastShotIteration = 0;
     public int initialPontuation = 0;
     public int bulletCount, pontuation;
-    public Transform bulletSpawnPoint;
-    public GameObject bullet;
-    public event Action OnPlayerDeath;
 
     // Use this for initialization
     void Start () {
+        CharacterInitialization();
         SetupInitialPlayerState();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (health <= minHealth) {
-            Die();
-        } else if (Input.GetMouseButton(0) && !playerDead) {
+        CheckCharacterHealth();
+
+        if (Input.GetMouseButton(0) && !dead) {
             if (Time.deltaTime * lastShotIteration >= rateOfFire)
             {
                 if (bulletCount > lowestBulletCountPossible) Shoot();
@@ -40,29 +30,17 @@ public class Player : MonoBehaviour {
     public void SetupInitialPlayerState()
     {
         health = maxHealth;
-        playerDead = false;
+        dead = false;
         bulletCount = initialBulletCount;
         pontuation = initialPontuation;
-        GameController.showCursor(false);
+        GameController.ShowCursor(false);
         lastShotIteration = 1000;
     }
 
-    public void Hit(float damage)
+    protected new void Shoot()
     {
-        health -= damage;
-    }
-
-    void Shoot()
-    {
-        GameObject bulletFired = (GameObject)Instantiate(bullet.gameObject, bulletSpawnPoint.transform.position, Quaternion.identity);
-        bulletFired.transform.rotation = bulletSpawnPoint.transform.rotation;
+        base.Shoot();
         bulletCount--;
         lastShotIteration = 0;
-    }
-
-    void Die()
-    {
-        playerDead = true;
-        OnPlayerDeath();
     }
 }

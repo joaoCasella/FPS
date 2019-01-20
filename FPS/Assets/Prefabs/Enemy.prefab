@@ -1364,12 +1364,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c57f59dacaca6749ba70f79af429a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
-  interval: 1
-  damping: 1
-  player: {fileID: 4522251101862558, guid: cf69d66e3741dd149a407982b75fa5a0, type: 2}
+  minHealth: 0
   bulletSpawnPoint: {fileID: 4532157987434090}
   bullet: {fileID: 1005637405080502, guid: ca290a7c715430c4ba2c185ec0af9cc9, type: 2}
+  interval: 1.5
+  damping: 1
+  player: {fileID: 4522251101862558, guid: cf69d66e3741dd149a407982b75fa5a0, type: 2}
 --- !u!137 &137574230693004038
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
