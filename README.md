@@ -15,7 +15,7 @@ My goal is to learn about the engine and its workflow. But still, there are some
 - [x] Fix the mouse cursor, that is visible during the gameplay (should be visible only in the menus)
 - [x] Fix the leaderboard appearance and logic
 - [ ] Save the leaderboard to the persistent storage on change 
-- [ ] Fix the enemy shots direction (they were suposed to aim at the player)
+- [x] Fix the enemy shots direction (they were suposed to aim at the player)
 - [ ] Reduce total project size
 - [ ] Standardize the game theme (at the moment, each asset is from a different theme)
 - [ ] Add some animations (already possible, for example, in the gun asset)

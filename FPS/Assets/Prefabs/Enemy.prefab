@@ -1018,7 +1018,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1246792356107548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0.9000424, y: 1.9320248, z: 4.3836703}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4246817264534292}
@@ -1047,7 +1047,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1930317500596836}
-  m_LocalRotation: {x: -0, y: -0.070710406, z: -0, w: 0.9974969}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.686, y: 1.4, z: 0.299}
   m_LocalScale: {x: 0.023139676, y: 0.023139676, z: 0.023139676}
   m_Children:
@@ -1057,7 +1057,7 @@ Transform:
   - {fileID: 4532157987434090}
   m_Father: {fileID: 4917599133837228}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: -8.110001, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4964976252470688
 Transform:
   m_ObjectHideFlags: 1
@@ -1365,12 +1365,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
-  health: 0
-  interval: 0
-  damping: 0
+  interval: 1
+  damping: 1
   player: {fileID: 4522251101862558, guid: cf69d66e3741dd149a407982b75fa5a0, type: 2}
-  bullet: {fileID: 1005637405080502, guid: ca290a7c715430c4ba2c185ec0af9cc9, type: 2}
   bulletSpawnPoint: {fileID: 4532157987434090}
+  bullet: {fileID: 1005637405080502, guid: ca290a7c715430c4ba2c185ec0af9cc9, type: 2}
 --- !u!137 &137574230693004038
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

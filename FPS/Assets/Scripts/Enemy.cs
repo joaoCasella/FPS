@@ -5,10 +5,11 @@ using System;
 
 public class Enemy : MonoBehaviour {
 
-    public float maxHealth, health, interval;
-    private int iterations;
-    public int damping;
-    private bool enemyDead;
+    public float maxHealth = 30f, interval = 1f;
+    private float health;
+    private int iterations = 0;
+    public int damping = 1;
+    private bool enemyDead = false;
     public Transform player, bulletSpawnPoint;
     public GameObject bullet;
     public event Action OnEnemyDeath;
@@ -17,10 +18,6 @@ public class Enemy : MonoBehaviour {
     void Start()
     {
         health = maxHealth;
-        interval = 1f;
-        enemyDead = false;
-        iterations = 0;
-        damping = 1;
         player = FindObjectOfType<Player>().transform;
     }
 
@@ -47,6 +44,11 @@ public class Enemy : MonoBehaviour {
             Quaternion rotation = Quaternion.LookRotation(lookPos);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
         }
+    }
+
+    public void Hit(float damage)
+    {
+        health -= damage;
     }
 
     void Shoot()

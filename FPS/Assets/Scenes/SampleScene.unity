@@ -15090,6 +15090,8 @@ MonoBehaviour:
   startMenuPanel: {fileID: 0}
   resultsMenuPanel: {fileID: 0}
   usernameInput: {fileID: 0}
+  usernameNotNullMessage: {fileID: 0}
+  sceneTransitionTime: 1.5
   sceneName: EndingScene
 --- !u!4 &1918170101
 Transform:

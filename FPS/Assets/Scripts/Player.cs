@@ -11,6 +11,8 @@ public class Player : MonoBehaviour {
     private bool playerDead;
     public int initialBulletCount = 10;
     public int lowestBulletCountPossible = 0;
+    public float rateOfFire = 0.2f;
+    public int lastShotIteration = 0;
     public int initialPontuation = 0;
     public int bulletCount, pontuation;
     public Transform bulletSpawnPoint;
@@ -27,8 +29,12 @@ public class Player : MonoBehaviour {
         if (health <= minHealth) {
             Die();
         } else if (Input.GetMouseButton(0) && !playerDead) {
-            if (bulletCount > lowestBulletCountPossible) Shoot();
+            if (Time.deltaTime * lastShotIteration >= rateOfFire)
+            {
+                if (bulletCount > lowestBulletCountPossible) Shoot();
+            }
         }
+        lastShotIteration++;
 	}
 
     public void SetupInitialPlayerState()
@@ -38,6 +44,12 @@ public class Player : MonoBehaviour {
         bulletCount = initialBulletCount;
         pontuation = initialPontuation;
         GameController.showCursor(false);
+        lastShotIteration = 1000;
+    }
+
+    public void Hit(float damage)
+    {
+        health -= damage;
     }
 
     void Shoot()
@@ -45,6 +57,7 @@ public class Player : MonoBehaviour {
         GameObject bulletFired = (GameObject)Instantiate(bullet.gameObject, bulletSpawnPoint.transform.position, Quaternion.identity);
         bulletFired.transform.rotation = bulletSpawnPoint.transform.rotation;
         bulletCount--;
+        lastShotIteration = 0;
     }
 
     void Die()
