@@ -19,5 +19,8 @@ My goal is to learn about the engine and its workflow. But still, there are some
 - [ ] Reduce total project size
 - [ ] Standardize the game theme (at the moment, each asset is from a different theme)
 - [ ] Add some animations (already possible, for example, in the gun asset)
-- [ ] Fix the bullet direction (from the player perspective)
+- [x] Fix the bullet direction (from the player perspective)
+- [ ] Add a proper crosshair on the player aim
+- [ ] Fix the sound jump when the user switches from the end to the start menu
+- [ ] Fix game architecture
 

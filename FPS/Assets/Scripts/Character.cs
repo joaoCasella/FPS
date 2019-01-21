@@ -13,12 +13,15 @@ public class Character : MonoBehaviour {
     protected bool dead = false;
     public Transform bulletSpawnPoint;
     public GameObject bullet;
+    public Transform gun;
+    private Weapon gunController;
     public event Action OnDeath;
 
     // Use this for initialization
     public void CharacterInitialization () {
         health = maxHealth;
         dead = false;
+        gunController = gun.GetComponent<Weapon>();
     }
 	
 	// Update is called once per frame
@@ -36,8 +39,7 @@ public class Character : MonoBehaviour {
 
     protected void Shoot()
     {
-        GameObject bulletFired = (GameObject)Instantiate(bullet.gameObject, bulletSpawnPoint.transform.position, Quaternion.identity);
-        bulletFired.transform.rotation = bulletSpawnPoint.transform.rotation;
+        gunController.Shoot();
     }
 
     protected virtual void Die()
