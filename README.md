@@ -20,7 +20,9 @@ My goal is to learn about the engine and its workflow. But still, there are some
 - [ ] Standardize the game theme (at the moment, each asset is from a different theme)
 - [ ] Add some animations (already possible, for example, in the gun asset)
 - [x] Fix the bullet direction (from the player perspective)
-- [ ] Add a proper crosshair on the player aim
+- [x] Add a proper crosshair on the player aim
 - [ ] Fix the sound jump when the user switches from the end to the start menu
 - [ ] Fix game architecture
+- [ ] Add some feedback when the user interacts with something
+- [ ] Make the enemies shooting times random (and add more sound variety)
 
