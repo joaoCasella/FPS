@@ -1,6 +1,8 @@
 # FPS
 This is the first game that I ever developed. Some things are being refactored
 
+![](Demo.gif)
+
 # Game Setup
 The game is a simple FPS game. It's initial version was developed in a day, and had some rules to be followed. Essentially, it is composed of 3 screens, one for the main menu, other for the game itself and the last for the final game screen. The game logic is simple, based on rounds, and at each round a new wave of enemies spawns. The enemies don't move, just follow your direction to determinate the shooting direction.
 
