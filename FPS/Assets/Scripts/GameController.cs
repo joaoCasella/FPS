@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player.SetupInitialPlayerState();
-        player.transform.position = new Vector3(0, 3, 0);
+        player.transform.position = new Vector3(0, 7.01f, 7);
         player.OnDeath += SavePontuationAndFinishGame;
     }
 	
@@ -50,13 +50,13 @@ public class GameController : MonoBehaviour {
 
     void CreateMoreEnemies()
     {
-        enemy1 = (GameObject)Instantiate(enemy.gameObject, new Vector3(-30, 2, 24), Quaternion.identity, castle);
+        enemy1 = (GameObject)Instantiate(enemy.gameObject, new Vector3(-15, 7.01f, 20), Quaternion.identity, castle);
         enemy1.GetComponent<Enemy>().OnDeath += IncreasePlayerPontuation;
-        enemy2 = (GameObject)Instantiate(enemy.gameObject, new Vector3(30, 2, 24), Quaternion.identity, castle);
+        enemy2 = (GameObject)Instantiate(enemy.gameObject, new Vector3(15, 7.01f, 20), Quaternion.identity, castle);
         enemy2.GetComponent<Enemy>().OnDeath += IncreasePlayerPontuation;
-        enemy3 = (GameObject)Instantiate(enemy.gameObject, new Vector3(30, 2, -12), Quaternion.identity, castle);
+        enemy3 = (GameObject)Instantiate(enemy.gameObject, new Vector3(15, 7.01f, -20), Quaternion.identity, castle);
         enemy3.GetComponent<Enemy>().OnDeath += IncreasePlayerPontuation;
-        enemy4 = (GameObject)Instantiate(enemy.gameObject, new Vector3(-30, 2, -12), Quaternion.identity, castle);
+        enemy4 = (GameObject)Instantiate(enemy.gameObject, new Vector3(-15, 7.01f, -20), Quaternion.identity, castle);
         enemy4.GetComponent<Enemy>().OnDeath += IncreasePlayerPontuation;
     }
 
@@ -69,15 +69,15 @@ public class GameController : MonoBehaviour {
     {
         if (ammoBox1 == null)
         {
-            ammoBox1 = (GameObject)Instantiate(ammoBox.gameObject, new Vector3(-30, 2, 8), Quaternion.identity, castle);
+            ammoBox1 = (GameObject)Instantiate(ammoBox.gameObject, new Vector3(-15, 6.01f, 0), Quaternion.identity, castle);
         }
         if (ammoBox2 == null)
         {
-            ammoBox2 = (GameObject)Instantiate(ammoBox.gameObject, new Vector3(0, 2, 8), Quaternion.identity, castle);
+            ammoBox2 = (GameObject)Instantiate(ammoBox.gameObject, new Vector3(0, 6.01f, 0), Quaternion.identity, castle);
         }
         if (ammoBox3 == null)
         {
-            ammoBox3 = (GameObject)Instantiate(ammoBox.gameObject, new Vector3(30, 2, 8), Quaternion.identity, castle);
+            ammoBox3 = (GameObject)Instantiate(ammoBox.gameObject, new Vector3(15, 6.01f, 0), Quaternion.identity, castle);
         }
     }
 
