@@ -1,6 +1,6 @@
 using Fps.Controller;
+using Fps.UI;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -35,7 +35,7 @@ public class SceneTransitions : MonoBehaviour {
         } else
         {
             usernameNotNullMessage.SetActive(false);
-            WinnersTable.CurrentPlayer = new PlayerIdentifier(0, usernameInput.text);
+            WinnersTable.RegisterCurrentPlayer(0, usernameInput.text);
             StartCoroutine(LoadScene());
         }
         
@@ -43,7 +43,7 @@ public class SceneTransitions : MonoBehaviour {
 
     public void PlayerDeathAndScreenChange(int pontuation)
     {
-        WinnersTable.CurrentPlayer = new PlayerIdentifier(pontuation, WinnersTable.CurrentPlayer.name);
+        WinnersTable.UpdateCurrentPlayerPontuation(pontuation);
         StartCoroutine(SetupTransition());
     }
 

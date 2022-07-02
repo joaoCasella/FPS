@@ -1,33 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public struct PlayerIdentifier
+﻿namespace Fps.UI
 {
-    public int pontuation;
-    public string name;
-
-    public PlayerIdentifier(int pontuation, string name)
+    public class WinnersTable
     {
-        this.pontuation = pontuation;
-        this.name = name;
-    }
-}
+        public const int TotalAmountPlayers = 5;
 
-public class WinnersTable : MonoBehaviour {
-    private static PlayerIdentifier[] winners = new PlayerIdentifier[5];
+        private static WinnersTablePlayerIdentifier[] winners = new WinnersTablePlayerIdentifier[TotalAmountPlayers];
 
-    public static PlayerIdentifier[] Winners
-    {
-        get
+        public static WinnersTablePlayerIdentifier[] Winners
         {
-            return winners;
+            get
+            {
+                return winners;
+            }
+            set
+            {
+                winners = value;
+            }
         }
-        set
+
+        public static WinnersTablePlayerIdentifier CurrentPlayer { get; set; }
+
+        public static void RegisterCurrentPlayer(int pontuation, string name)
         {
-            winners = value;
+            CurrentPlayer = new WinnersTablePlayerIdentifier(pontuation, name);
+        }
+
+        public static void UpdateCurrentPlayerPontuation(int pontuation)
+        {
+            CurrentPlayer = new WinnersTablePlayerIdentifier(pontuation, CurrentPlayer.Name);
         }
     }
-
-    public static PlayerIdentifier CurrentPlayer { get; set; }
 }
