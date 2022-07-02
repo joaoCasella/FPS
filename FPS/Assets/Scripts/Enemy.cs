@@ -1,64 +1,67 @@
 ﻿using UnityEngine;
 
-public class Enemy : Character
+namespace Fps.Controller
 {
-    public override float maxHealth
+    public class Enemy : Character
     {
-        get { return 30f; }
-    }
-    public float interval = 1f;
-    private int iterations = 0;
-    public int damping = 1;
-    public Transform player;
+        public override float MaxHealth => 30f;
 
-    // Use this for initialization
-    void Start()
-    {
-        CharacterInitialization();
-        player = FindObjectOfType<Player>().transform;
-    }
+        [field: SerializeField]
+        public float Interval { get; set; } = 1f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        CheckCharacterHealth();
+        [field: SerializeField]
+        public int Damping { get; set; } = 1;
 
-        TrackPlayerMovement();
+        private int Iterations { get; set; } = 0;
+        private Transform Player { get; set; }
 
-        if (Time.deltaTime * iterations >= interval && !dead)
+        private void Start()
         {
-            Shoot();
+            CharacterInitialization();
+            Player = FindObjectOfType<Player>().transform;
         }
-        else
+
+        private void Update()
         {
-            iterations++;
+            CheckCharacterHealth();
+
+            TrackPlayerMovement();
+
+            if (Time.deltaTime * Iterations >= Interval && !Dead)
+            {
+                Shoot();
+            }
+            else
+            {
+                Iterations++;
+            }
         }
-    }
 
-    public Quaternion LookAtPlayerRotation()
-    {
-        if (player == null)
-            return Quaternion.identity;
+        public Quaternion LookAtPlayerRotation()
+        {
+            if (Player == null)
+                return Quaternion.identity;
 
-        var lookPos = player.position - transform.position;
-        lookPos.y = 0;
-        return Quaternion.LookRotation(lookPos);
-    }
+            var lookPos = Player.position - transform.position;
+            lookPos.y = 0;
+            return Quaternion.LookRotation(lookPos);
+        }
 
-    void TrackPlayerMovement()
-    {
-        transform.rotation = Quaternion.Slerp(transform.rotation, LookAtPlayerRotation(), Time.deltaTime * damping);
-    }
+        private void TrackPlayerMovement()
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, LookAtPlayerRotation(), Time.deltaTime * Damping);
+        }
 
-    protected new void Shoot()
-    {
-        base.Shoot();
-        iterations = 0;
-    }
+        protected new void Shoot()
+        {
+            base.Shoot();
+            Iterations = 0;
+        }
 
-    protected override void Die()
-    {
-        base.Die();
-        Destroy(this.gameObject);
+        protected override void Die()
+        {
+            base.Die();
+            Destroy(gameObject);
+        }
     }
 }

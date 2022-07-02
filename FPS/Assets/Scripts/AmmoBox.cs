@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using Fps.Controller;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ public class AmmoBox : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            other.gameObject.GetComponent<Player>().bulletCount += reloadAmmo;
+            other.gameObject.GetComponent<Player>().BulletCount += reloadAmmo;
         }
         Destroy(this.gameObject);
     }

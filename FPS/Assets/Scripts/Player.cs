@@ -1,47 +1,57 @@
-using Fps.Controller;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Player : Character {
-    public int initialBulletCount = 10;
-    public int lowestBulletCountPossible = 0;
-    public float rateOfFire = 0.2f;
-    public int lastShotIteration = 0;
-    public int initialPontuation = 0;
-    public int bulletCount, pontuation;
+namespace Fps.Controller
+{
+    public class Player : Character
+    {
+        [field: SerializeField]
+        private int InitialBulletCount { get; set; } = 10;
 
-    // Use this for initialization
-    void Start () {
-        CharacterInitialization();
-        SetupInitialPlayerState();
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        CheckCharacterHealth();
+        [field: SerializeField]
+        private float RateOfFire { get; set; } = 0.2f;
 
-        if (Input.GetMouseButton(0) && !dead) {
-            if (Time.deltaTime * lastShotIteration >= rateOfFire)
-            {
-                if (bulletCount > lowestBulletCountPossible) Shoot();
-            }
+        private int LowestBulletCountPossible { get; set; } = 0;
+        private int LastShotIteration { get; set; } = 0;
+        private int InitialPontuation { get; set; } = 0;
+
+        public int BulletCount { get; set; }
+        public int Pontuation { get; set; }
+
+        private void Start()
+        {
+            CharacterInitialization();
+            SetupInitialPlayerState();
         }
-        lastShotIteration++;
-	}
 
-    public void SetupInitialPlayerState()
-    {
-        health = maxHealth;
-        dead = false;
-        bulletCount = initialBulletCount;
-        pontuation = initialPontuation;
-        GameController.ShowCursor(false);
-        lastShotIteration = 1000;
-    }
+        private void Update()
+        {
+            CheckCharacterHealth();
 
-    protected new void Shoot()
-    {
-        base.Shoot();
-        bulletCount--;
-        lastShotIteration = 0;
+            if (Input.GetMouseButton(0)
+                && !Dead
+                && Time.deltaTime * LastShotIteration >= RateOfFire
+                && BulletCount > LowestBulletCountPossible)
+            {
+                Shoot();
+            }
+            LastShotIteration++;
+        }
+
+        public void SetupInitialPlayerState()
+        {
+            _health = MaxHealth;
+            Dead = false;
+            BulletCount = InitialBulletCount;
+            Pontuation = InitialPontuation;
+            GameController.ShowCursor(false);
+            LastShotIteration = 1000;
+        }
+
+        protected new void Shoot()
+        {
+            base.Shoot();
+            BulletCount--;
+            LastShotIteration = 0;
+        }
     }
 }

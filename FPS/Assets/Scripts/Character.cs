@@ -1,55 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
-using System;
 
-public class Character : MonoBehaviour {
-    public virtual float maxHealth
+namespace Fps.Controller
+{
+    public class Character : MonoBehaviour
     {
-        get { return 100f; }
-    }
-    public float minHealth = 0f;
-    protected float health;
-    protected bool dead = false;
-    public Transform bulletSpawnPoint;
-    public GameObject bullet;
-    public Transform gun;
-    private Weapon gunController;
-    public event Action OnDeath;
+        public virtual float MaxHealth => 100f;
 
-    // Use this for initialization
-    public void CharacterInitialization () {
-        health = maxHealth;
-        dead = false;
-        gunController = gun.GetComponent<Weapon>();
-    }
-	
-	// Update is called once per frame
-	public void CheckCharacterHealth () {
-        if (health <= minHealth)
+        [field: SerializeField]
+        private float MinHealth { get; set; } = 0f;
+
+        [field: SerializeField]
+        private Weapon GunController { get; set; }
+
+        protected bool Dead { get; set; } = false;
+        public event Action OnDeath;
+
+        protected float _health;
+        public float Health => Mathf.Clamp(_health, MinHealth, MaxHealth);
+
+        public void CharacterInitialization()
         {
+            _health = MaxHealth;
+            Dead = false;
+        }
+
+        public void CheckCharacterHealth()
+        {
+            if (_health > MinHealth)
+                return;
+
             Die();
         }
-    }
 
-    public void Hit(float damage)
-    {
-        health -= damage;
-    }
+        public void Hit(float damage)
+        {
+            _health -= damage;
+        }
 
-    protected void Shoot()
-    {
-        gunController.Shoot();
-    }
+        protected void Shoot()
+        {
+            GunController.Shoot();
+        }
 
-    protected virtual void Die()
-    {
-        dead = true;
-        OnDeath();
-    }
-
-    public float Health()
-    {
-        return health;
+        protected virtual void Die()
+        {
+            Dead = true;
+            OnDeath();
+        }
     }
 }

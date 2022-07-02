@@ -738,17 +738,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea8c6eb62282b847ac1252afe33bd8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minHealth: 0
-  bulletSpawnPoint: {fileID: 4887619924293828}
-  bullet: {fileID: 1681618088066670, guid: ce67041df9848074bae0e17d6c58e0e6, type: 3}
-  gun: {fileID: 4372494606688284}
-  initialBulletCount: 10
-  lowestBulletCountPossible: 0
-  rateOfFire: 0.2
-  lastShotIteration: 0
-  initialPontuation: 0
-  bulletCount: 0
-  pontuation: 0
+  <MinHealth>k__BackingField: 0
+  <GunController>k__BackingField: {fileID: 114272963567005906}
+  <InitialBulletCount>k__BackingField: 10
+  <RateOfFire>k__BackingField: 0.2
 --- !u!1 &1673871154982486
 GameObject:
   m_ObjectHideFlags: 0

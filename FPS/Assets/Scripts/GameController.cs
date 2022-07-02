@@ -67,9 +67,9 @@ namespace Fps.Controller
         {
             if (Player != null)
             {
-                PlayerHealth.text = $"Life: {Mathf.RoundToInt(Player.Health())}/100";
-                PlayerPontuation.text = $"Pontuation: {Mathf.RoundToInt(Player.pontuation)}";
-                PlayerAmmo.text = $"Ammo: {Mathf.RoundToInt(Player.bulletCount)}";
+                PlayerHealth.text = $"Life: {Mathf.RoundToInt(Player.Health)}/100";
+                PlayerPontuation.text = $"Pontuation: {Mathf.RoundToInt(Player.Pontuation)}";
+                PlayerAmmo.text = $"Ammo: {Mathf.RoundToInt(Player.BulletCount)}";
             }
 
             if (!AllEnemiesDead())
@@ -88,7 +88,7 @@ namespace Fps.Controller
 
         private void SavePontuationAndFinishGame()
         {
-            SceneTransition.PlayerDeathAndScreenChange(Player.pontuation);
+            SceneTransition.PlayerDeathAndScreenChange(Player.Pontuation);
         }
 
         private void CreateMoreEnemies()
@@ -109,7 +109,7 @@ namespace Fps.Controller
 
         private void IncreasePlayerPontuation()
         {
-            Player.pontuation++;
+            Player.Pontuation++;
         }
 
         private void CreateAmmoBoxes()
