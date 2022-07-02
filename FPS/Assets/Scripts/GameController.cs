@@ -1,94 +1,134 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class GameController : MonoBehaviour {
-    public Player player;
-    public Enemy enemy;
-    public AmmoBox ammoBox;
-    public GameObject sceneTransition;
-    private GameObject enemy1, enemy2, enemy3, enemy4, ammoBox1, ammoBox2, ammoBox3;
-    public float timeUntilNextRound, nextRoundStart = 10f;
-    public Text playerHealth, playerPontuation, playerAmmo;
-    public Transform castle;
+namespace Fps.Controller
+{
+    public class GameController : MonoBehaviour
+    {
+        private readonly Vector3 PlayerStartPosition = new Vector3(0, 7.01f, 7);
 
-    // Use this for initialization
-    void Start () {
-        player.SetupInitialPlayerState();
-        player.transform.position = new Vector3(0, 7.01f, 7);
-        player.OnDeath += SavePontuationAndFinishGame;
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        if (player != null)
+        [field: SerializeField]
+        private Player Player { get; set; }
+
+        [field: SerializeField]
+        private AmmoBox AmmoBox { get; set; }
+
+        [field: SerializeField]
+        private SceneTransitions SceneTransition { get; set; }
+
+        [field: SerializeField]
+        private Enemy EnemyPrefab { get; set; }
+
+        [field: SerializeField]
+        public float TimeUntilNextRound { get; set; }
+
+        [field: SerializeField]
+        private float NextRoundStart { get; set; } = 10f;
+
+        [field: SerializeField]
+        public TextMeshProUGUI PlayerHealth { get; set; }
+
+        [field: SerializeField]
+        public TextMeshProUGUI PlayerPontuation { get; set; }
+
+        [field: SerializeField]
+        public TextMeshProUGUI PlayerAmmo { get; set; }
+
+        [field: SerializeField]
+        public Transform Castle { get; set; }
+
+        private List<Vector3> EnemiesPositions { get; } = new List<Vector3>()
         {
-            playerHealth.text = "Life: " + Mathf.RoundToInt(player.Health()).ToString() + "/100";
-            playerPontuation.text = "Pontuation: " + Mathf.RoundToInt(player.pontuation).ToString();
-            playerAmmo.text = "Ammo: " + Mathf.RoundToInt(player.bulletCount).ToString();
-        }
-        if (AllEnemiesDead())
-        {
-            if (timeUntilNextRound <= 0)
-            {
-                timeUntilNextRound = nextRoundStart;
-                CreateMoreEnemies();
-                CreateAmmoBoxes();
-
-            } else
-            {
-                timeUntilNextRound -= Time.deltaTime;
-            }
+            new Vector3(-15, 7.01f, 20),
+            new Vector3(15, 7.01f, 20),
+            new Vector3(15, 7.01f, -20),
+            new Vector3(-15, 7.01f, -20),
         };
-	}
 
-    void SavePontuationAndFinishGame()
-    {
-        sceneTransition.GetComponent<SceneTransitions>().PlayerDeathAndScreenChange(player.pontuation);
-    }
-
-    void CreateMoreEnemies()
-    {
-        enemy1 = (GameObject)Instantiate(enemy.gameObject, new Vector3(-15, 7.01f, 20), Quaternion.identity, castle);
-        enemy1.GetComponent<Enemy>().OnDeath += IncreasePlayerPontuation;
-        enemy2 = (GameObject)Instantiate(enemy.gameObject, new Vector3(15, 7.01f, 20), Quaternion.identity, castle);
-        enemy2.GetComponent<Enemy>().OnDeath += IncreasePlayerPontuation;
-        enemy3 = (GameObject)Instantiate(enemy.gameObject, new Vector3(15, 7.01f, -20), Quaternion.identity, castle);
-        enemy3.GetComponent<Enemy>().OnDeath += IncreasePlayerPontuation;
-        enemy4 = (GameObject)Instantiate(enemy.gameObject, new Vector3(-15, 7.01f, -20), Quaternion.identity, castle);
-        enemy4.GetComponent<Enemy>().OnDeath += IncreasePlayerPontuation;
-    }
-
-    void IncreasePlayerPontuation()
-    {
-        player.pontuation ++;
-    }
-
-    void CreateAmmoBoxes()
-    {
-        if (ammoBox1 == null)
+        private List<Vector3> AmmoBoxesPositions { get; } = new List<Vector3>()
         {
-            ammoBox1 = (GameObject)Instantiate(ammoBox.gameObject, new Vector3(-15, 6.01f, 0), Quaternion.identity, castle);
-        }
-        if (ammoBox2 == null)
-        {
-            ammoBox2 = (GameObject)Instantiate(ammoBox.gameObject, new Vector3(0, 6.01f, 0), Quaternion.identity, castle);
-        }
-        if (ammoBox3 == null)
-        {
-            ammoBox3 = (GameObject)Instantiate(ammoBox.gameObject, new Vector3(15, 6.01f, 0), Quaternion.identity, castle);
-        }
-    }
+            new Vector3(-15, 6.01f, 0),
+            new Vector3(0, 6.01f, 0),
+            new Vector3(15, 6.01f, 0),
+        };
 
-    bool AllEnemiesDead()
-    {
-        return (enemy1 == null && enemy2 == null && enemy3 == null && enemy4 == null);
-    }
+        private List<Enemy> Enemies { get; set; }
 
-    public static void ShowCursor(bool shouldShow)
-    {
-        Cursor.visible = shouldShow;
-        Cursor.lockState = shouldShow ? CursorLockMode.None : CursorLockMode.Locked;
+        private void Start()
+        {
+            Player.SetupInitialPlayerState();
+            Player.transform.position = PlayerStartPosition;
+            Player.OnDeath += SavePontuationAndFinishGame;
+        }
+
+        private void Update()
+        {
+            if (Player != null)
+            {
+                PlayerHealth.text = $"Life: {Mathf.RoundToInt(Player.Health())}/100";
+                PlayerPontuation.text = $"Pontuation: {Mathf.RoundToInt(Player.pontuation)}";
+                PlayerAmmo.text = $"Ammo: {Mathf.RoundToInt(Player.bulletCount)}";
+            }
+
+            if (!AllEnemiesDead())
+                return;
+
+            if (TimeUntilNextRound > 0)
+            {
+                TimeUntilNextRound -= Time.deltaTime;
+                return;
+            }
+
+            TimeUntilNextRound = NextRoundStart;
+            CreateMoreEnemies();
+            CreateAmmoBoxes();
+        }
+
+        private void SavePontuationAndFinishGame()
+        {
+            SceneTransition.PlayerDeathAndScreenChange(Player.pontuation);
+        }
+
+        private void CreateMoreEnemies()
+        {
+            if (Enemies != null)
+                Enemies.Clear();
+            else
+                Enemies = new List<Enemy>();
+
+            foreach (var position in EnemiesPositions)
+            {
+                var enemyInstantiated = Instantiate(EnemyPrefab, position, Quaternion.identity, Castle);
+                enemyInstantiated.transform.rotation = enemyInstantiated.LookAtPlayerRotation();
+                enemyInstantiated.OnDeath += IncreasePlayerPontuation;
+                Enemies.Add(enemyInstantiated);
+            }
+        }
+
+        private void IncreasePlayerPontuation()
+        {
+            Player.pontuation++;
+        }
+
+        private void CreateAmmoBoxes()
+        {
+            foreach (var position in AmmoBoxesPositions)
+            {
+                Instantiate(AmmoBox.gameObject, position, Quaternion.identity, Castle);
+            }
+        }
+
+        private bool AllEnemiesDead()
+        {
+            return Enemies?.All(e => e == null) != false;
+        }
+
+        public static void ShowCursor(bool shouldShow)
+        {
+            Cursor.visible = shouldShow;
+            Cursor.lockState = shouldShow ? CursorLockMode.None : CursorLockMode.Locked;
+        }
     }
 }

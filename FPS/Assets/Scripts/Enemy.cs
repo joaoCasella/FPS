@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class Enemy : Character {
+public class Enemy : Character
+{
     public override float maxHealth
     {
         get { return 30f; }
@@ -23,23 +24,30 @@ public class Enemy : Character {
         CheckCharacterHealth();
 
         TrackPlayerMovement();
- 
-        if (Time.deltaTime * iterations >= interval && !dead) {
+
+        if (Time.deltaTime * iterations >= interval && !dead)
+        {
             Shoot();
-        } else {
-            iterations ++;
         }
+        else
+        {
+            iterations++;
+        }
+    }
+
+    public Quaternion LookAtPlayerRotation()
+    {
+        if (player == null)
+            return Quaternion.identity;
+
+        var lookPos = player.position - transform.position;
+        lookPos.y = 0;
+        return Quaternion.LookRotation(lookPos);
     }
 
     void TrackPlayerMovement()
     {
-        if (player != null)
-        {
-            Vector3 lookPos = player.position - transform.position;
-            lookPos.y = 0;
-            Quaternion rotation = Quaternion.LookRotation(lookPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
-        }
+        transform.rotation = Quaternion.Slerp(transform.rotation, LookAtPlayerRotation(), Time.deltaTime * damping);
     }
 
     protected new void Shoot()
