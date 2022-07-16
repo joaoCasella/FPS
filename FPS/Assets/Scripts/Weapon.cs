@@ -1,30 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Serialization;
 
-public class Weapon : MonoBehaviour {
-    public Transform bulletSpawnPoint;
-    public GameObject bullet;
-    private Animator anim;
-    private AudioSource audioSource;
-    public AudioClip shotSound;
-
-    void Start()
+namespace Fps.Controller
+{
+    public class Weapon : MonoBehaviour
     {
-        anim = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
-    }
+        [field: SerializeField, FormerlySerializedAs("bulletSpawnPoint")]
+        private Transform BulletSpawnPoint { get; set; }
 
-    public void Shoot()
-    {
-        if(anim != null) {
-            anim.SetTrigger("Shoot");
-        }
-        if(audioSource != null)
+        [field: SerializeField, FormerlySerializedAs("bullet")]
+        private GameObject Bullet { get; set; }
+
+        [field: SerializeField, FormerlySerializedAs("shotSound")]
+        private AudioClip ShotSound { get; set; }
+
+        [field: SerializeField, FormerlySerializedAs("anim")]
+        private Animator Anim { get; set; }
+
+        [field: SerializeField, FormerlySerializedAs("audioSource")]
+        private AudioSource AudioSource { get; set; }
+
+        public void Shoot()
         {
-            audioSource.PlayOneShot(shotSound);
+            if (Anim != null)
+                Anim.SetTrigger("Shoot");
+
+            if (AudioSource != null)
+                AudioSource.PlayOneShot(ShotSound);
+
+            var bulletFired = Instantiate(Bullet, BulletSpawnPoint.transform.position, Quaternion.identity);
+            bulletFired.transform.rotation = BulletSpawnPoint.transform.rotation;
         }
-        GameObject bulletFired = (GameObject)Instantiate(bullet.gameObject, bulletSpawnPoint.transform.position, Quaternion.identity);
-        bulletFired.transform.rotation = bulletSpawnPoint.transform.rotation;
     }
 }

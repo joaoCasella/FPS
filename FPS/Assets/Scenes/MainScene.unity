@@ -10027,7 +10027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1913012787
 Animator:
   serializedVersion: 3
@@ -10060,7 +10060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10134,14 +10134,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73995ff6803d0ad41a635f9eb2dc5d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionAnimator: {fileID: 1913012787}
-  mainMenuPanel: {fileID: 0}
-  startMenuPanel: {fileID: 0}
-  resultsMenuPanel: {fileID: 0}
-  usernameInput: {fileID: 0}
-  usernameNotNullMessage: {fileID: 0}
-  sceneTransitionTime: 1.5
-  sceneName: EndingScene
+  <TransitionAnimator>k__BackingField: {fileID: 1913012787}
+  <MainMenuPanel>k__BackingField: {fileID: 0}
+  <StartMenuPanel>k__BackingField: {fileID: 0}
+  <ResultsMenuPanel>k__BackingField: {fileID: 0}
+  <UsernameInput>k__BackingField: {fileID: 0}
+  <UsernameNotNullMessage>k__BackingField: {fileID: 0}
+  <SceneTransitionTime>k__BackingField: 1.5
+  <SceneName>k__BackingField: EndingScene
 --- !u!4 &1918170101
 Transform:
   m_ObjectHideFlags: 0

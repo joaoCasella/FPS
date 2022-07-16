@@ -924,14 +924,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73995ff6803d0ad41a635f9eb2dc5d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionAnimator: {fileID: 1128552111}
-  mainMenuPanel: {fileID: 181038507}
-  startMenuPanel: {fileID: 90042264}
-  resultsMenuPanel: {fileID: 22945388}
-  usernameInput: {fileID: 0}
-  usernameNotNullMessage: {fileID: 0}
-  sceneTransitionTime: 1.5
-  sceneName: SampleScene
+  <TransitionAnimator>k__BackingField: {fileID: 1128552111}
+  <MainMenuPanel>k__BackingField: {fileID: 181038507}
+  <StartMenuPanel>k__BackingField: {fileID: 90042264}
+  <ResultsMenuPanel>k__BackingField: {fileID: 22945388}
+  <UsernameInput>k__BackingField: {fileID: 0}
+  <UsernameNotNullMessage>k__BackingField: {fileID: 0}
+  <SceneTransitionTime>k__BackingField: 1.5
+  <SceneName>k__BackingField: SampleScene
 --- !u!1001 &593211002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1123,14 +1123,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73995ff6803d0ad41a635f9eb2dc5d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionAnimator: {fileID: 1128552111}
-  mainMenuPanel: {fileID: 181038507}
-  startMenuPanel: {fileID: 90042264}
-  resultsMenuPanel: {fileID: 22945388}
-  usernameInput: {fileID: 0}
-  usernameNotNullMessage: {fileID: 0}
-  sceneTransitionTime: 1.5
-  sceneName: SampleScene
+  <TransitionAnimator>k__BackingField: {fileID: 1128552111}
+  <MainMenuPanel>k__BackingField: {fileID: 181038507}
+  <StartMenuPanel>k__BackingField: {fileID: 90042264}
+  <ResultsMenuPanel>k__BackingField: {fileID: 22945388}
+  <UsernameInput>k__BackingField: {fileID: 0}
+  <UsernameNotNullMessage>k__BackingField: {fileID: 0}
+  <SceneTransitionTime>k__BackingField: 1.5
+  <SceneName>k__BackingField: SampleScene
 --- !u!1 &850595661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,14 +1690,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73995ff6803d0ad41a635f9eb2dc5d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionAnimator: {fileID: 1128552111}
-  mainMenuPanel: {fileID: 181038507}
-  startMenuPanel: {fileID: 90042264}
-  resultsMenuPanel: {fileID: 22945388}
-  usernameInput: {fileID: 0}
-  usernameNotNullMessage: {fileID: 0}
-  sceneTransitionTime: 1.5
-  sceneName: SampleScene
+  <TransitionAnimator>k__BackingField: {fileID: 1128552111}
+  <MainMenuPanel>k__BackingField: {fileID: 181038507}
+  <StartMenuPanel>k__BackingField: {fileID: 90042264}
+  <ResultsMenuPanel>k__BackingField: {fileID: 22945388}
+  <UsernameInput>k__BackingField: {fileID: 0}
+  <UsernameNotNullMessage>k__BackingField: {fileID: 0}
+  <SceneTransitionTime>k__BackingField: 1.5
+  <SceneName>k__BackingField: SampleScene
 --- !u!1 &1232718644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,14 +2162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73995ff6803d0ad41a635f9eb2dc5d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionAnimator: {fileID: 1128552111}
-  mainMenuPanel: {fileID: 181038507}
-  startMenuPanel: {fileID: 90042264}
-  resultsMenuPanel: {fileID: 22945388}
-  usernameInput: {fileID: 1090701772}
-  usernameNotNullMessage: {fileID: 2127433123}
-  sceneTransitionTime: 1.5
-  sceneName: MainScene
+  <TransitionAnimator>k__BackingField: {fileID: 1128552111}
+  <MainMenuPanel>k__BackingField: {fileID: 181038507}
+  <StartMenuPanel>k__BackingField: {fileID: 90042264}
+  <ResultsMenuPanel>k__BackingField: {fileID: 22945388}
+  <UsernameInput>k__BackingField: {fileID: 1090701772}
+  <UsernameNotNullMessage>k__BackingField: {fileID: 2127433123}
+  <SceneTransitionTime>k__BackingField: 1.5
+  <SceneName>k__BackingField: MainScene
 --- !u!4 &1440257100
 Transform:
   m_ObjectHideFlags: 0
@@ -2584,14 +2584,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73995ff6803d0ad41a635f9eb2dc5d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionAnimator: {fileID: 1128552111}
-  mainMenuPanel: {fileID: 181038507}
-  startMenuPanel: {fileID: 90042264}
-  resultsMenuPanel: {fileID: 22945388}
-  usernameInput: {fileID: 1090701772}
-  usernameNotNullMessage: {fileID: 2127433123}
-  sceneTransitionTime: 1.5
-  sceneName: MainScene
+  <TransitionAnimator>k__BackingField: {fileID: 1128552111}
+  <MainMenuPanel>k__BackingField: {fileID: 181038507}
+  <StartMenuPanel>k__BackingField: {fileID: 90042264}
+  <ResultsMenuPanel>k__BackingField: {fileID: 22945388}
+  <UsernameInput>k__BackingField: {fileID: 1090701772}
+  <UsernameNotNullMessage>k__BackingField: {fileID: 2127433123}
+  <SceneTransitionTime>k__BackingField: 1.5
+  <SceneName>k__BackingField: MainScene
 --- !u!1 &1738012559
 GameObject:
   m_ObjectHideFlags: 0
@@ -3436,14 +3436,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73995ff6803d0ad41a635f9eb2dc5d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionAnimator: {fileID: 1128552111}
-  mainMenuPanel: {fileID: 181038507}
-  startMenuPanel: {fileID: 90042264}
-  resultsMenuPanel: {fileID: 22945388}
-  usernameInput: {fileID: 0}
-  usernameNotNullMessage: {fileID: 0}
-  sceneTransitionTime: 1.5
-  sceneName: SampleScene
+  <TransitionAnimator>k__BackingField: {fileID: 1128552111}
+  <MainMenuPanel>k__BackingField: {fileID: 181038507}
+  <StartMenuPanel>k__BackingField: {fileID: 90042264}
+  <ResultsMenuPanel>k__BackingField: {fileID: 22945388}
+  <UsernameInput>k__BackingField: {fileID: 0}
+  <UsernameNotNullMessage>k__BackingField: {fileID: 0}
+  <SceneTransitionTime>k__BackingField: 1.5
+  <SceneName>k__BackingField: SampleScene
 --- !u!1 &2038953610
 GameObject:
   m_ObjectHideFlags: 0

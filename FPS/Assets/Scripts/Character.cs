@@ -46,7 +46,8 @@ namespace Fps.Controller
         protected virtual void Die()
         {
             Dead = true;
-            OnDeath();
+            OnDeath?.Invoke();
+            OnDeath = null;
         }
     }
 }

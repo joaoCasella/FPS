@@ -4,19 +4,7 @@
     {
         public const int TotalAmountPlayers = 5;
 
-        private static WinnersTablePlayerIdentifier[] winners = new WinnersTablePlayerIdentifier[TotalAmountPlayers];
-
-        public static WinnersTablePlayerIdentifier[] Winners
-        {
-            get
-            {
-                return winners;
-            }
-            set
-            {
-                winners = value;
-            }
-        }
+        public static WinnersTablePlayerIdentifier[] Winners { get; set; } = new WinnersTablePlayerIdentifier[TotalAmountPlayers];
 
         public static WinnersTablePlayerIdentifier CurrentPlayer { get; set; }
 

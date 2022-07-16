@@ -1,27 +1,19 @@
-using Fps.Controller;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AmmoBox : MonoBehaviour {
-
-    public int reloadAmmo;
-    // Use this for initialization
-    void Start () {
-        reloadAmmo = 20;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    private void OnTriggerEnter(Collider other)
+namespace Fps.Controller
+{
+    public class AmmoBox : MonoBehaviour
     {
-        if (other.tag == "Player")
+        [field: SerializeField]
+        private int ReloadAmmo { get; set; }
+
+        private void OnTriggerEnter(Collider other)
         {
-            other.gameObject.GetComponent<Player>().BulletCount += reloadAmmo;
+            if (other.CompareTag("Player") && other.TryGetComponent(out Player player))
+            {
+                player.BulletCount += ReloadAmmo;
+            }
+            Destroy(gameObject);
         }
-        Destroy(this.gameObject);
     }
 }

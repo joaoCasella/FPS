@@ -5,79 +5,98 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneTransitions : MonoBehaviour {
-
-    public Animator transitionAnimator;
-    public GameObject mainMenuPanel, startMenuPanel, resultsMenuPanel;
-    public InputField usernameInput;
-    public GameObject usernameNotNullMessage;
-    public float sceneTransitionTime = 1.5f;
-    public string sceneName;
-
-    IEnumerator LoadScene()
+namespace Fps.Manager
+{
+    public class SceneTransitions : MonoBehaviour
     {
-        transitionAnimator.SetTrigger("End");
-        yield return new WaitForSeconds(sceneTransitionTime);
-        SceneManager.LoadScene(sceneName);
-    }
+        [field: SerializeField]
+        private Animator TransitionAnimator { get; set; }
 
-    public void StartClick()
-    {
-        mainMenuPanel.SetActive(false);
-        startMenuPanel.SetActive(true);
-    }
+        [field: SerializeField]
+        private GameObject MainMenuPanel { get; set; }
 
-    public void RegisterNameAndBeginNewGame()
-    {
-        if(string.IsNullOrEmpty(usernameInput.text))
+        [field: SerializeField]
+        private GameObject StartMenuPanel { get; set; }
+
+        [field: SerializeField]
+        private GameObject ResultsMenuPanel { get; set; }
+
+        [field: SerializeField]
+        private InputField UsernameInput { get; set; }
+
+        [field: SerializeField]
+        private GameObject UsernameNotNullMessage { get; set; }
+
+        [field: SerializeField]
+        private float SceneTransitionTime { get; set; } = 1.5f;
+
+        [field: SerializeField]
+        private string SceneName { get; set; }
+
+        private IEnumerator LoadScene()
         {
-            usernameNotNullMessage.SetActive(true);
-        } else
+            TransitionAnimator.SetTrigger("End");
+            yield return new WaitForSeconds(SceneTransitionTime);
+            SceneManager.LoadScene(SceneName);
+        }
+
+        public void StartClick()
         {
-            usernameNotNullMessage.SetActive(false);
-            WinnersTable.RegisterCurrentPlayer(0, usernameInput.text);
+            MainMenuPanel.SetActive(false);
+            StartMenuPanel.SetActive(true);
+        }
+
+        public void RegisterNameAndBeginNewGame()
+        {
+            if (string.IsNullOrWhiteSpace(UsernameInput.text))
+            {
+                UsernameNotNullMessage.SetActive(true);
+                return;
+            }
+
+            UsernameNotNullMessage.SetActive(false);
+            WinnersTable.RegisterCurrentPlayer(0, UsernameInput.text);
             StartCoroutine(LoadScene());
         }
-        
-    }
 
-    public void PlayerDeathAndScreenChange(int pontuation)
-    {
-        WinnersTable.UpdateCurrentPlayerPontuation(pontuation);
-        StartCoroutine(SetupTransition());
-    }
+        public void PlayerDeathAndScreenChange(int pontuation)
+        {
+            WinnersTable.UpdateCurrentPlayerPontuation(pontuation);
+            StartCoroutine(SetupTransition());
+        }
 
-    IEnumerator SetupTransition()
-    {
-        yield return StartCoroutine(LoadScene());
-        yield return StartCoroutine(SetupCursor());
-    }
+        private IEnumerator SetupTransition()
+        {
+            yield return StartCoroutine(LoadScene());
+            yield return StartCoroutine(SetupCursor());
+        }
 
-    IEnumerator SetupCursor()
-    {
-        GameController.ShowCursor(true);
-        yield return null;
-    }
+        private IEnumerator SetupCursor()
+        {
+            GameController.ShowCursor(true);
+            yield return null;
+        }
 
-    public void StartNewGameClick()
-    {
-        StartCoroutine(LoadScene());
-    }
+        public void StartNewGameClick()
+        {
+            StartCoroutine(LoadScene());
+        }
 
-    public void ResultsClick()
-    {
-        mainMenuPanel.SetActive(false);
-        resultsMenuPanel.SetActive(true);
-    }
+        public void ResultsClick()
+        {
+            MainMenuPanel.SetActive(false);
+            ResultsMenuPanel.SetActive(true);
+        }
 
-    public void BackClick()
-    {
-        resultsMenuPanel.SetActive(false);
-        mainMenuPanel.SetActive(true);
-    }
+        public void BackClick()
+        {
+            ResultsMenuPanel.SetActive(false);
+            MainMenuPanel.SetActive(true);
+        }
 
-    public void QuitClick()
-    {
-        Application.Quit();
+        public void QuitClick()
+        {
+            Application.Quit();
+        }
     }
 }

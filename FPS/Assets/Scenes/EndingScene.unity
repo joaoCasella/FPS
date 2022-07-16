@@ -524,14 +524,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73995ff6803d0ad41a635f9eb2dc5d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionAnimator: {fileID: 1104083882}
-  mainMenuPanel: {fileID: 0}
-  startMenuPanel: {fileID: 0}
-  resultsMenuPanel: {fileID: 851399398}
-  usernameInput: {fileID: 0}
-  usernameNotNullMessage: {fileID: 0}
-  sceneTransitionTime: 1.5
-  sceneName: WelcomeScene
+  <TransitionAnimator>k__BackingField: {fileID: 1104083882}
+  <MainMenuPanel>k__BackingField: {fileID: 0}
+  <StartMenuPanel>k__BackingField: {fileID: 0}
+  <ResultsMenuPanel>k__BackingField: {fileID: 851399398}
+  <UsernameInput>k__BackingField: {fileID: 0}
+  <UsernameNotNullMessage>k__BackingField: {fileID: 0}
+  <SceneTransitionTime>k__BackingField: 1.5
+  <SceneName>k__BackingField: WelcomeScene
 --- !u!114 &735377670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1395,14 +1395,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73995ff6803d0ad41a635f9eb2dc5d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionAnimator: {fileID: 1104083882}
-  mainMenuPanel: {fileID: 0}
-  startMenuPanel: {fileID: 0}
-  resultsMenuPanel: {fileID: 851399398}
-  usernameInput: {fileID: 0}
-  usernameNotNullMessage: {fileID: 0}
-  sceneTransitionTime: 0
-  sceneName: WelcomeScene
+  <TransitionAnimator>k__BackingField: {fileID: 1104083882}
+  <MainMenuPanel>k__BackingField: {fileID: 0}
+  <StartMenuPanel>k__BackingField: {fileID: 0}
+  <ResultsMenuPanel>k__BackingField: {fileID: 851399398}
+  <UsernameInput>k__BackingField: {fileID: 0}
+  <UsernameNotNullMessage>k__BackingField: {fileID: 0}
+  <SceneTransitionTime>k__BackingField: 0
+  <SceneName>k__BackingField: WelcomeScene
 --- !u!82 &1352621388
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1960,14 +1960,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73995ff6803d0ad41a635f9eb2dc5d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionAnimator: {fileID: 1104083882}
-  mainMenuPanel: {fileID: 0}
-  startMenuPanel: {fileID: 0}
-  resultsMenuPanel: {fileID: 851399398}
-  usernameInput: {fileID: 0}
-  usernameNotNullMessage: {fileID: 0}
-  sceneTransitionTime: 0
-  sceneName: WelcomeScene
+  <TransitionAnimator>k__BackingField: {fileID: 1104083882}
+  <MainMenuPanel>k__BackingField: {fileID: 0}
+  <StartMenuPanel>k__BackingField: {fileID: 0}
+  <ResultsMenuPanel>k__BackingField: {fileID: 851399398}
+  <UsernameInput>k__BackingField: {fileID: 0}
+  <UsernameNotNullMessage>k__BackingField: {fileID: 0}
+  <SceneTransitionTime>k__BackingField: 0
+  <SceneName>k__BackingField: WelcomeScene
 --- !u!114 &1876378541
 MonoBehaviour:
   m_ObjectHideFlags: 0

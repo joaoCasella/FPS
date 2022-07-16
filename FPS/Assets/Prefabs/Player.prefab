@@ -427,9 +427,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968287fd7400e7f4ea458b5bff9c4e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawnPoint: {fileID: 4887619924293828}
-  bullet: {fileID: 1681618088066670, guid: ce67041df9848074bae0e17d6c58e0e6, type: 3}
-  shotSound: {fileID: 8300000, guid: 363b4d1420d444b8c8d6955f7bd1fbde, type: 3}
+  <BulletSpawnPoint>k__BackingField: {fileID: 4887619924293828}
+  <Bullet>k__BackingField: {fileID: 1681618088066670, guid: ce67041df9848074bae0e17d6c58e0e6,
+    type: 3}
+  <ShotSound>k__BackingField: {fileID: 8300000, guid: 363b4d1420d444b8c8d6955f7bd1fbde,
+    type: 3}
+  <Anim>k__BackingField: {fileID: 95367539001017496}
+  <AudioSource>k__BackingField: {fileID: 82759198756386950}
 --- !u!1 &1498336614022690
 GameObject:
   m_ObjectHideFlags: 0

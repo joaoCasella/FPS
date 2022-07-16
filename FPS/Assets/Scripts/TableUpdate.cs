@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Fps.UI
@@ -67,14 +66,8 @@ namespace Fps.UI
 
         private string PlayerName(int position)
         {
-            if (!string.IsNullOrEmpty(WinnersTable.Winners[position].Name))
-            {
-                return WinnersTable.Winners[position].Name;
-            }
-            else
-            {
-                return PlaceholderPlayerName;
-            }
+            var winnersName = WinnersTable.Winners[position].Name;
+            return string.IsNullOrWhiteSpace(winnersName) ? PlaceholderPlayerName : winnersName;
         }
     }
 }

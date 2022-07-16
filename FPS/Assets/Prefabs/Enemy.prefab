@@ -284,9 +284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MinHealth>k__BackingField: 0
   <GunController>k__BackingField: {fileID: 114978987240162660}
-  interval: 1.5
-  damping: 1
-  player: {fileID: 4522251101862558, guid: cf69d66e3741dd149a407982b75fa5a0, type: 3}
+  <Interval>k__BackingField: 1.5
+  <Damping>k__BackingField: 1
 --- !u!54 &54589748311009730
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -911,9 +910,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968287fd7400e7f4ea458b5bff9c4e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawnPoint: {fileID: 4793395093871858}
-  bullet: {fileID: 1005637405080502, guid: ca290a7c715430c4ba2c185ec0af9cc9, type: 3}
-  shotSound: {fileID: 8300000, guid: 9cc99277f231e4adbbd91ff1821f526b, type: 3}
+  <BulletSpawnPoint>k__BackingField: {fileID: 4793395093871858}
+  <Bullet>k__BackingField: {fileID: 1005637405080502, guid: ca290a7c715430c4ba2c185ec0af9cc9,
+    type: 3}
+  <ShotSound>k__BackingField: {fileID: 8300000, guid: 9cc99277f231e4adbbd91ff1821f526b,
+    type: 3}
+  <Anim>k__BackingField: {fileID: 0}
+  <AudioSource>k__BackingField: {fileID: 82770219372075574}
 --- !u!82 &82770219372075574
 AudioSource:
   m_ObjectHideFlags: 0

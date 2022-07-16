@@ -1,35 +1,37 @@
-using Fps.Controller;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
-    public float expireRate, bulletSpeed;
-    private float currentTimer;
-    public float damage;
-
-    void FixedUpdate()
+namespace Fps.Controller
+{
+    public class Bullet : MonoBehaviour
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * bulletSpeed);
-        currentTimer += Time.deltaTime;
+        protected virtual string OpponentTagIdentifier => "Enemy";
 
-        if (currentTimer >= expireRate)
+        [field: SerializeField]
+        private float Lifetime { get; set; }
+
+        [field: SerializeField]
+        private float BulletSpeed { get; set; }
+
+        [field: SerializeField]
+        private float Damage { get; set; }
+
+        private float CurrentTimer { get; set; }
+
+        private void FixedUpdate()
         {
-            Destroy(this.gameObject);
-        }
-    }
+            transform.Translate(BulletSpeed * Time.deltaTime * Vector3.forward);
+            CurrentTimer += Time.deltaTime;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(OpponentTagIdentifier()))
+            if (CurrentTimer >= Lifetime && this != null && gameObject != null)
+                Destroy(gameObject);
+        }
+
+        private void OnTriggerEnter(Collider other)
         {
-            other.gameObject.GetComponent<Character>().Hit(damage);
-        }
-        Destroy(this.gameObject);
-    }
+            if (other.CompareTag(OpponentTagIdentifier) && other.TryGetComponent(out Character character))
+                character.Hit(Damage);
 
-    protected virtual string OpponentTagIdentifier()
-    {
-        return "Enemy";
+            Destroy(gameObject);
+        }
     }
 }

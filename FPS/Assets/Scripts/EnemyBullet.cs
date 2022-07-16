@@ -1,6 +1,7 @@
-﻿public class EnemyBullet : Bullet {
-    protected override string OpponentTagIdentifier()
+﻿namespace Fps.Controller
+{
+    public class EnemyBullet : Bullet
     {
-        return "Player";
+        protected override string OpponentTagIdentifier => "Player";
     }
 }
