@@ -23,7 +23,7 @@ namespace Fps.Controller
             SetupInitialPlayerState();
         }
 
-        private void Update()
+        protected void Update()
         {
             CheckCharacterHealth();
 
