@@ -19,8 +19,15 @@ namespace Fps.Controller
         [field: SerializeField, Range(0.01f, 0.2f)]
         private float RightMovementOnPress { get; set; } = 0.05f;
 
+        [field: SerializeField, Range(60f, 120f)]
+        private float CameraPitchLimit { get; set; } = 90f;
 
+        private CameraRotation CameraRotationEulerAngles { get; set; }
 
+        private void Start()
+        {
+            CameraRotationEulerAngles = new CameraRotation(Camera.transform.localEulerAngles);
+        }
 
         private void FixedUpdate()
         {
@@ -63,20 +70,31 @@ namespace Fps.Controller
             base.Update();
 
             var delta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-            Camera.transform.rotation = Aim(delta.x, -delta.y);
+            Aim(delta.x, -delta.y);
         }
 
-        // Based on Freya's solution, available at: https://twitter.com/FreyaHolmer/status/1445398551891259416?s=20&t=LJk2oZ_EK4gVGXm7y3SP6g
+        // Based on Freya's solution, available at: https://twitter.com/FreyaHolmer/status/1445398551891259416
         // Accessed in 15/08/2022
-        // TODO: clamp the resulting rotation when looking up/down (pitch)
-        private Quaternion Aim(float horizontalOffset, float verticalOffset)
+        private void Aim(float horizontalOffset, float verticalOffset)
         {
-            var rotation = Camera.transform.rotation;
+            CameraRotationEulerAngles.X = Mathf.Clamp(CameraRotationEulerAngles.X + verticalOffset * VerticalSensitivity, -CameraPitchLimit, CameraPitchLimit) % 360f;
+            CameraRotationEulerAngles.Y = (CameraRotationEulerAngles.Y + horizontalOffset * HorizontalSensitivity) % 360f;
 
-            var horizontalRotation = Quaternion.AngleAxis(horizontalOffset * HorizontalSensitivity, Vector3.up);
-            var verticalRotation = Quaternion.AngleAxis(verticalOffset * VerticalSensitivity, Vector3.right);
+            Camera.transform.localRotation = Quaternion.Euler(CameraRotationEulerAngles.X, CameraRotationEulerAngles.Y, CameraRotationEulerAngles.Z);
+        }
 
-            return horizontalRotation * rotation * verticalRotation;
+        private class CameraRotation
+        {
+            public float X { get; set; }
+            public float Y { get; set; }
+            public float Z { get; set; }
+
+            public CameraRotation(Vector3 eulerAngles)
+            {
+                X = eulerAngles.x;
+                Y = eulerAngles.y;
+                Z = eulerAngles.z;
+            }
         }
     }
 }
