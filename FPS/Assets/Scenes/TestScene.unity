@@ -8077,6 +8077,9 @@ MonoBehaviour:
   <VerticalSensitivity>k__BackingField: 1
   <ForwardMovementOnPress>k__BackingField: 0.1
   <RightMovementOnPress>k__BackingField: 0.1
+  <JumpHeight>k__BackingField: 0.8
+  <JumpTime>k__BackingField: 0.35
+  <JumpGravityMultiplier>k__BackingField: 1
   <CameraPitchLimit>k__BackingField: 85
 --- !u!1 &1673869408010400
 GameObject:
