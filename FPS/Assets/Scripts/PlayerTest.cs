@@ -21,6 +21,8 @@ namespace Fps.Controller
         private float ForwardMovementOnPress { get; set; } = 0.05f;
         [field: SerializeField, Range(0.01f, 0.2f)]
         private float RightMovementOnPress { get; set; } = 0.05f;
+        [field: SerializeField, Range(0.01f, 2f)]
+        private float RunMultiplier { get; set; } = 1.5f;
 
         [field: SerializeField, Range(0.01f, 5f)]
         private float JumpHeight { get; set; } = 1f;
@@ -79,6 +81,12 @@ namespace Fps.Controller
                 rightMove--;
             if (Input.GetKey(KeyCode.D))
                 rightMove++;
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                forwardMove *= RunMultiplier;
+                rightMove *= RunMultiplier;
+            }
 
             transform.position += Move(forwardMove, rightMove);
 

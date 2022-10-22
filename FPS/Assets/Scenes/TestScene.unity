@@ -8499,6 +8499,7 @@ MonoBehaviour:
   <VerticalSensitivity>k__BackingField: 1
   <ForwardMovementOnPress>k__BackingField: 0.15
   <RightMovementOnPress>k__BackingField: 0.15
+  <RunMultiplier>k__BackingField: 1.5
   <JumpHeight>k__BackingField: 0.8
   <JumpTime>k__BackingField: 0.35
   <JumpGravityMultiplier>k__BackingField: 1
