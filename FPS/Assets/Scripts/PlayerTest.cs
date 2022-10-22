@@ -6,49 +6,50 @@ namespace Fps.Controller
 {
     public class PlayerTest : Player
     {
+        [field: Header("Components")]
         [field: SerializeField]
         private Camera Camera { get; set; }
 
-        [field: SerializeField]
-        private LayerMask FloorLayerMask { get; set; }
-
+        [field: Header("Aim parameters")]
         [field: SerializeField, Range(0.01f, 2f)]
-        private float HorizontalSensitivity { get; set; } = 0.5f;
+        private float HorizontalSensitivity { get; set; } = 1f;
         [field: SerializeField, Range(0.01f, 2f)]
-        private float VerticalSensitivity { get; set; } = 0.5f;
+        private float VerticalSensitivity { get; set; } = 1f;
+        [field: SerializeField, Range(60f, 120f)]
+        private float CameraPitchLimit { get; set; } = 85f;
 
+        [field: Header("Movement parameters")]
         [field: SerializeField, Range(0.01f, 0.2f)]
-        private float ForwardMovementOnPress { get; set; } = 0.05f;
+        private float ForwardMovementOnPress { get; set; } = 0.15f;
         [field: SerializeField, Range(0.01f, 0.2f)]
-        private float RightMovementOnPress { get; set; } = 0.05f;
+        private float RightMovementOnPress { get; set; } = 0.15f;
         [field: SerializeField, Range(0.01f, 2f)]
         private float RunMultiplier { get; set; } = 1.5f;
 
+        [field: Header("Jump parameters")]
         [field: SerializeField, Range(0.01f, 5f)]
-        private float JumpHeight { get; set; } = 1f;
-
+        private float JumpHeight { get; set; } = 0.8f;
         [field: SerializeField, Range(0.01f, 1f)]
-        private float JumpTime { get; set; } = 0.5f;
-
+        private float JumpTime { get; set; } = 0.35f;
         [field: SerializeField, Range(0.1f, 2f)]
         private float JumpGravityMultiplier { get; set; } = 1f;
 
+        [field: Header("General parameters")]
         [field: SerializeField, Range(0.0005f, 0.008f), Tooltip("Also works as the mass")]
-        private float SlopeDecelerationMultiplier { get; set; } = 0.008f;
-
-        [field: SerializeField, Range(60f, 120f)]
-        private float CameraPitchLimit { get; set; } = 90f;
-
+        private float SlopeDecelerationMultiplier { get; set; } = 0.004f;
         [field: SerializeField, Range(1f, 3f)]
         private float PlayerHeight { get; set; } = 1f;
+        [field: SerializeField]
+        private LayerMask FloorLayerMask { get; set; }
 
         private CameraRotation CameraRotationEulerAngles { get; set; }
         private Vector3 PlaneNormal { get; set; } = Vector3.up;
-        private float Gravity { get; set; }
-        private float VerticalVelocity { get; set; }
         private Vector3 ProjectedContactPoint { get; set; }
-        private Coroutine Jumping { get; set; }
-        private bool IsJumping => Jumping != null;
+
+        private float Gravity { get; set; }
+        private float JumpVerticalVelocity { get; set; }
+        private Coroutine JumpingCoroutine { get; set; }
+        private bool IsJumping => JumpingCoroutine != null;
 
         private void Start()
         {
@@ -63,9 +64,9 @@ namespace Fps.Controller
             var oneOverTime = 1f / JumpTime;
 
             // v0 = 2 * JumpHeight / th
-            VerticalVelocity = 2f * JumpHeight * oneOverTime;
+            JumpVerticalVelocity = 2f * JumpHeight * oneOverTime;
             // g = -2 * JumpHeight / (th ^ 2)
-            Gravity = -(VerticalVelocity) * oneOverTime;
+            Gravity = -(JumpVerticalVelocity) * oneOverTime;
         }
 
         private void FixedUpdate()
@@ -73,6 +74,7 @@ namespace Fps.Controller
             float rightMove = 0f;
             float forwardMove = 0f;
 
+            // TODO: generalize input logic elsewhere to allow the user to change keybindings
             if (Input.GetKey(KeyCode.W))
                 forwardMove++;
             if (Input.GetKey(KeyCode.S))
@@ -82,6 +84,7 @@ namespace Fps.Controller
             if (Input.GetKey(KeyCode.D))
                 rightMove++;
 
+            // TODO: generalize input logic elsewhere to allow the user to change keybindings
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 forwardMove *= RunMultiplier;
@@ -106,8 +109,9 @@ namespace Fps.Controller
                 ProjectedContactPoint = transform.position - (PlayerHeight * Vector3.up);
             }
 
+            // TODO: generalize input logic elsewhere to allow the user to change keybindings
             if (Input.GetKey(KeyCode.Space) && !IsJumping)
-                Jumping = StartCoroutine(ParabolicMovement(JumpGravityMultiplier, null, () => Jumping = null));
+                JumpingCoroutine = StartCoroutine(ParabolicMovement(JumpGravityMultiplier, null, () => JumpingCoroutine = null));
         }
 
         private Vector3 Move(float forwardMovementDirection, float rightMovementDirection)
@@ -148,7 +152,7 @@ namespace Fps.Controller
         {
             SetupGravity();
 
-            var verticalVelocity = VerticalVelocity;
+            var verticalVelocity = JumpVerticalVelocity;
             var gravity = Gravity;
 
             var waitForFixedUpdate = new WaitForFixedUpdate();

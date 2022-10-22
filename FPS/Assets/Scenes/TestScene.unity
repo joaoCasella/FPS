@@ -8492,11 +8492,9 @@ MonoBehaviour:
   <InitialBulletCount>k__BackingField: 10
   <RateOfFire>k__BackingField: 0.2
   <Camera>k__BackingField: {fileID: 20906092440946446}
-  <FloorLayerMask>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 512
   <HorizontalSensitivity>k__BackingField: 1
   <VerticalSensitivity>k__BackingField: 1
+  <CameraPitchLimit>k__BackingField: 85
   <ForwardMovementOnPress>k__BackingField: 0.15
   <RightMovementOnPress>k__BackingField: 0.15
   <RunMultiplier>k__BackingField: 1.5
@@ -8504,8 +8502,10 @@ MonoBehaviour:
   <JumpTime>k__BackingField: 0.35
   <JumpGravityMultiplier>k__BackingField: 1
   <SlopeDecelerationMultiplier>k__BackingField: 0.004
-  <CameraPitchLimit>k__BackingField: 85
   <PlayerHeight>k__BackingField: 1
+  <FloorLayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &1673869408010400
 GameObject:
   m_ObjectHideFlags: 0
