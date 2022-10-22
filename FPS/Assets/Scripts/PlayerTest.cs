@@ -37,11 +37,16 @@ namespace Fps.Controller
         [field: SerializeField, Range(60f, 120f)]
         private float CameraPitchLimit { get; set; } = 90f;
 
+        [field: SerializeField, Range(1f, 3f)]
+        private float PlayerHeight { get; set; } = 1f;
+
         private CameraRotation CameraRotationEulerAngles { get; set; }
         private Vector3 PlaneNormal { get; set; } = Vector3.up;
         private float Gravity { get; set; }
         private float VerticalVelocity { get; set; }
+        private Vector3 ProjectedContactPoint { get; set; }
         private Coroutine Jumping { get; set; }
+        private bool IsJumping => Jumping != null;
 
         private void Start()
         {
@@ -77,14 +82,24 @@ namespace Fps.Controller
 
             transform.position += Move(forwardMove, rightMove);
 
-            // TODO: allow the player to jump while on a slope (the last check prevents this behaviour)
-            if (Input.GetKey(KeyCode.Space) && Jumping == null && PlaneNormal == Vector3.up)
-                Jumping = StartCoroutine(ParabolicMovement(JumpGravityMultiplier, transform.position.y, null, () => Jumping = null));
-
             if (Physics.Raycast(transform.position, -transform.up, out RaycastHit raycastHit, float.MaxValue, FloorLayerMask))
+            {
                 PlaneNormal = raycastHit.normal;
+                ProjectedContactPoint = raycastHit.point + (PlayerHeight * Vector3.up);
+
+                // Fix player height
+                if (!IsJumping)
+                    transform.position = new Vector3(transform.position.x, ProjectedContactPoint.y, transform.position.z);
+            }
             else
+            {
+                // Shouldn't happen but we treat it anyway
                 PlaneNormal = Vector3.up;
+                ProjectedContactPoint = transform.position - (PlayerHeight * Vector3.up);
+            }
+
+            if (Input.GetKey(KeyCode.Space) && !IsJumping)
+                Jumping = StartCoroutine(ParabolicMovement(JumpGravityMultiplier, null, () => Jumping = null));
         }
 
         private Vector3 Move(float forwardMovementDirection, float rightMovementDirection)
@@ -92,18 +107,20 @@ namespace Fps.Controller
             var slopeAtenuation = Vector3.zero;
             var slopeDeclination = Vector3.Dot(PlaneNormal, Vector3.up);
 
-            if (!Mathf.Approximately(slopeDeclination, 1f))
+            if (!Mathf.Approximately(slopeDeclination, 1f) && !IsJumping)
             {
                 var planeRight = Vector3.Cross(PlaneNormal, Vector3.up);
                 var planeForward = Vector3.Cross(planeRight, PlaneNormal);
 
-                slopeAtenuation = (float) Math.Acos(slopeDeclination) * SlopeDecelerationMultiplier * Gravity * planeForward;
+                slopeAtenuation = (float)Math.Acos(slopeDeclination) * SlopeDecelerationMultiplier * Gravity * planeForward;
             }
 
             var cameraForward = Camera.transform.forward;
+            // Should not consider plane inclination if jumping
+            var relativeUp = !IsJumping ? PlaneNormal : Vector3.up;
             // > 0 if points up (same direction), 0 if points forward, < 0 if points down (oposite directions)
-            var forwardProjectionOnNormal = Vector3.Dot(cameraForward, PlaneNormal);
-            var forwardRelativeToCamera = cameraForward - (forwardProjectionOnNormal * PlaneNormal);
+            var forwardProjectionOnNormal = Vector3.Dot(cameraForward, relativeUp);
+            var forwardRelativeToCamera = cameraForward - (forwardProjectionOnNormal * relativeUp);
 
             var cameraRight = Camera.transform.right;
             // > 0 if points up (same direction), 0 if points forward, < 0 if points down (oposite directions)
@@ -118,7 +135,6 @@ namespace Fps.Controller
         // (10/09/2022) Based on "Math for Game Programmers: Building a Better Jump", available at: https://www.youtube.com/watch?v=hG9SzQxaCm8
         private IEnumerator ParabolicMovement(
             float descendGravityMultiplier,
-            float finalVerticalPosition,
             Action onMovementPeak,
             Action onComplete)
         {
@@ -136,9 +152,9 @@ namespace Fps.Controller
                 var heightIncrement = (verticalVelocity * deltaTime) + (gravity * deltaTime * deltaTime * 0.5f);
 
                 // Prevents miscalculation
-                if (transform.position.y + heightIncrement <= finalVerticalPosition)
+                if (transform.position.y + heightIncrement <= ProjectedContactPoint.y)
                 {
-                    transform.position = new Vector3(transform.position.x, finalVerticalPosition, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, ProjectedContactPoint.y, transform.position.z);
                     break;
                 }
 
@@ -155,9 +171,9 @@ namespace Fps.Controller
 
                 yield return waitForFixedUpdate;
             }
-            while (transform.position.y > finalVerticalPosition);
+            while (transform.position.y > ProjectedContactPoint.y);
 
-            transform.position = new Vector3(transform.position.x, finalVerticalPosition, transform.position.z);
+            transform.position = new Vector3(transform.position.x, ProjectedContactPoint.y, transform.position.z);
 
             onComplete?.Invoke();
         }
@@ -174,8 +190,8 @@ namespace Fps.Controller
         // Accessed in 15/08/2022
         private void Aim(float horizontalOffset, float verticalOffset)
         {
-            CameraRotationEulerAngles.X = Mathf.Clamp(CameraRotationEulerAngles.X + verticalOffset * VerticalSensitivity, -CameraPitchLimit, CameraPitchLimit) % 360f;
-            CameraRotationEulerAngles.Y = (CameraRotationEulerAngles.Y + horizontalOffset * HorizontalSensitivity) % 360f;
+            CameraRotationEulerAngles.X = Mathf.Clamp(CameraRotationEulerAngles.X + (verticalOffset * VerticalSensitivity), -CameraPitchLimit, CameraPitchLimit) % 360f;
+            CameraRotationEulerAngles.Y = (CameraRotationEulerAngles.Y + (horizontalOffset * HorizontalSensitivity)) % 360f;
 
             Camera.transform.localRotation = Quaternion.Euler(CameraRotationEulerAngles.X, CameraRotationEulerAngles.Y, CameraRotationEulerAngles.Z);
         }
