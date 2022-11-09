@@ -11,7 +11,7 @@ namespace Fps.Controller
         private float MinHealth { get; set; } = 0f;
 
         [field: SerializeField]
-        private Weapon GunController { get; set; }
+        protected Weapon GunController { get; private set; }
 
         protected bool Dead { get; set; } = false;
         public event Action OnDeath;

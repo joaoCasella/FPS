@@ -11,11 +11,16 @@ namespace Fps.Controller
         private float RateOfFire { get; set; } = 0.2f;
 
         private int LowestBulletCountPossible { get; set; } = 0;
-        private int LastShotIteration { get; set; } = 0;
         private int InitialPontuation { get; set; } = 0;
+        private float TimeSinceLastShot { get; set; }
 
         public int BulletCount { get; set; }
         public int Pontuation { get; set; }
+
+        private void Awake()
+        {
+            GunController.RateOfFire = RateOfFire;
+        }
 
         private void Start()
         {
@@ -29,12 +34,13 @@ namespace Fps.Controller
 
             if (Input.GetMouseButton(0)
                 && !Dead
-                && Time.deltaTime * LastShotIteration >= RateOfFire
+                && TimeSinceLastShot >= RateOfFire
                 && BulletCount > LowestBulletCountPossible)
             {
                 Shoot();
             }
-            LastShotIteration++;
+
+            TimeSinceLastShot += Time.deltaTime;
         }
 
         public void SetupInitialPlayerState()
@@ -44,14 +50,14 @@ namespace Fps.Controller
             BulletCount = InitialBulletCount;
             Pontuation = InitialPontuation;
             GameController.ShowCursor(false);
-            LastShotIteration = 1000;
+            TimeSinceLastShot = RateOfFire;
         }
 
         protected new void Shoot()
         {
             base.Shoot();
             BulletCount--;
-            LastShotIteration = 0;
+            TimeSinceLastShot = 0f;
         }
     }
 }
