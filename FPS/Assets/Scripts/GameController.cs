@@ -70,7 +70,7 @@ namespace Fps.Controller
             {
                 PlayerHealth.text = $"Life: {Mathf.RoundToInt(Player.Health)}/100";
                 PlayerPontuation.text = $"Pontuation: {Mathf.RoundToInt(Player.Pontuation)}";
-                PlayerAmmo.text = $"Ammo: {Mathf.RoundToInt(Player.BulletCount)}";
+                PlayerAmmo.text = $"Ammo: {Mathf.RoundToInt(Player.AmmoOnMag)}/{Mathf.RoundToInt(Player.StoredAmmo)}";
             }
 
             if (!AllEnemiesDead())

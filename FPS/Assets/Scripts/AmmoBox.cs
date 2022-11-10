@@ -11,9 +11,9 @@ namespace Fps.Controller
         {
             if (other.CompareTag("Player") && other.TryGetComponent(out Player player))
             {
-                player.BulletCount += ReloadAmmo;
+                player.StoredAmmo += ReloadAmmo;
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
     }
 }
