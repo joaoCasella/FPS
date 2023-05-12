@@ -33,7 +33,7 @@ namespace Fps.Controller
             Die();
         }
 
-        public void Hit(float damage)
+        public virtual void Hit(float damage, Vector3 bulletDirection)
         {
             _health -= damage;
         }

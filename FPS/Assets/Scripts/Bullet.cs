@@ -29,7 +29,7 @@ namespace Fps.Controller
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(OpponentTagIdentifier) && other.TryGetComponent(out Character character))
-                character.Hit(Damage);
+                character.Hit(Damage, Vector3.forward);
 
             Destroy(gameObject);
         }

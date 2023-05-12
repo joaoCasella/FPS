@@ -1,47 +1,9 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Fps.Controller
 {
     public class Player : Character
     {
-        [field: Header("Components")]
-        [field: SerializeField]
-        private Camera Camera { get; set; }
-
-        [field: Header("Aim parameters")]
-        [field: SerializeField, Range(0.01f, 2f)]
-        private float HorizontalSensitivity { get; set; } = 1f;
-        [field: SerializeField, Range(0.01f, 2f)]
-        private float VerticalSensitivity { get; set; } = 1f;
-        [field: SerializeField, Range(60f, 120f)]
-        private float CameraPitchLimit { get; set; } = 85f;
-
-        [field: Header("Movement parameters")]
-        [field: SerializeField, Range(0.01f, 0.2f)]
-        private float ForwardMovementOnPress { get; set; } = 0.15f;
-        [field: SerializeField, Range(0.01f, 0.2f)]
-        private float RightMovementOnPress { get; set; } = 0.15f;
-        [field: SerializeField, Range(0.01f, 2f)]
-        private float RunMultiplier { get; set; } = 1.5f;
-
-        [field: Header("Jump parameters")]
-        [field: SerializeField, Range(0.01f, 5f)]
-        private float JumpHeight { get; set; } = 0.8f;
-        [field: SerializeField, Range(0.01f, 1f)]
-        private float JumpTime { get; set; } = 0.35f;
-        [field: SerializeField, Range(0.1f, 2f)]
-        private float JumpGravityMultiplier { get; set; } = 1f;
-
-        [field: Header("General parameters")]
-        [field: SerializeField, Range(0.0005f, 0.008f), Tooltip("Also works as the mass")]
-        private float SlopeDecelerationMultiplier { get; set; } = 0.004f;
-        [field: SerializeField, Range(1f, 3f)]
-        private float PlayerHeight { get; set; } = 1f;
-        [field: SerializeField]
-        private LayerMask FloorLayerMask { get; set; }
-
         // TODO: remove this parameter, should be specific to the weapon,
         // not the player
         [field: SerializeField]
@@ -52,7 +14,7 @@ namespace Fps.Controller
         [field: SerializeField]
         private float RateOfFire { get; set; } = 0.2f;
 
-        // Pontuation related
+        private int LowestBulletCountPossible { get; set; } = 0;
         private int InitialPontuation { get; set; } = 0;
         public int Pontuation { get; set; }
 
@@ -62,16 +24,10 @@ namespace Fps.Controller
         private bool Reloading { get; set; }
         private float TimeSinceLastShot { get; set; }
 
-        // Aim/movement related
-        private CameraRotation CameraRotationEulerAngles { get; set; }
-        private Vector3 PlaneNormal { get; set; } = Vector3.up;
-        private Vector3 ProjectedContactPoint { get; set; }
-
-        // Jump related
-        private float Gravity { get; set; }
-        private float JumpVerticalVelocity { get; set; }
-        private Coroutine JumpingCoroutine { get; set; }
-        private bool IsJumping => JumpingCoroutine != null;
+        public int AmmoOnMag { get; set; }
+        public int StoredAmmo { get; set; }
+        public int Pontuation { get; set; }
+        private bool Reloading { get; set; }
 
         private void Awake()
         {
@@ -140,29 +96,14 @@ namespace Fps.Controller
             TimeSinceLastShot += Time.deltaTime;
         }
 
-        private bool CanShoot()
+        public void SetupInitialPlayerState()
         {
-            return AmmoOnMag > 0;
-        }
-
-        private bool CanReload()
-        {
-            return StoredAmmo > 0
-                && AmmoOnMag < WeaponMagCapacity;
-        }
-
-        public async void Reload()
-        {
-            if (Reloading || !CanReload())
-                return;
-
-            Reloading = true;
-
-            await GunController.Reload();
-
-            StoredAmmo = Math.Max(StoredAmmo - (WeaponMagCapacity - AmmoOnMag), 0);
-            AmmoOnMag = WeaponMagCapacity;
-            Reloading = false;
+            _health = MaxHealth;
+            Dead = false;
+            BulletCount = InitialBulletCount;
+            Pontuation = InitialPontuation;
+            GameController.ShowCursor(false);
+            TimeSinceLastShot = RateOfFire;
         }
 
         protected new void Shoot()
@@ -305,6 +246,13 @@ namespace Fps.Controller
             CameraRotationEulerAngles.Y = (CameraRotationEulerAngles.Y + (horizontalOffset * HorizontalSensitivity)) % 360f;
 
             Camera.transform.localRotation = Quaternion.Euler(CameraRotationEulerAngles.X, CameraRotationEulerAngles.Y, CameraRotationEulerAngles.Z);
+        }
+
+        public override void Hit(float damage, Vector3 bulletDirection)
+        {
+            base.Hit(damage, bulletDirection);
+
+            // TODO: update canvas
         }
 
         private class CameraRotation
